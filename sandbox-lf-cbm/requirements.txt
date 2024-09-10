@@ -1,0 +1,6 @@
+ftfy
+regex
+tqdm
+pandas
+pytorchcv
+sentence_transformers

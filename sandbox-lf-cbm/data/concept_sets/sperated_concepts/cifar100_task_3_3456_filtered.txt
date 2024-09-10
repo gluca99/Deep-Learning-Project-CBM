@@ -1,0 +1,274 @@
+a alarm clock
+a animal
+a bar
+a barn
+a beach
+a beard (in some cases)
+a bed frame
+a bedside table
+a bib
+a bicycle seat
+a bird
+a bird feeder
+a black and white color scheme
+a blanket
+a bottle opener
+a bouquet
+a box spring
+a branch
+a bright color
+a bright, red color
+a bucket
+a cage
+a can opener
+a car
+a career
+a chain
+a child
+a coaster
+a comforter
+a computer
+a computer screen
+a control room
+a cord
+a countdown
+a crab pot
+a crabbing line
+a crabbing net
+a crabbing trap
+a crew of astronauts
+a crib
+a crosswalk
+a cupboard
+a curb
+a deep voice
+a deep, dark color
+a delicate, colorful flower
+a desk
+a diaper
+a drill
+a drink
+a family
+a farm
+a fence
+a field
+a fish
+a footboard
+a forest
+a fork
+a forked tail
+a frame
+a frame connecting the wheels
+a fridge
+a garden
+a glass
+a greenhouse
+a handlebar
+a hard exoskeleton
+a hard, crustacean body
+a headboard
+a helmet
+a hole in the ground
+a hook
+a house
+a job
+a jungle
+a keeper
+a keyboard
+a kitchen
+a knife
+a label
+a lamp
+a large body
+a large, colorful flower
+a large, flat surface
+a large, rocky mass
+a launch
+a launchpad
+a lawn
+a leaf
+a lid or opening at the top
+a light purple or white color
+a lobster trap
+a lock
+a long stem with thorns
+a long tail
+a long, bushy tail
+a long, cylindrical shape
+a long, naked tail
+a long, narrow shape
+a long, segmented tail
+a long, straight path
+a long, thin body
+a long, thin neck
+a mattress
+a meal
+a metal or plastic body
+a mouse pad
+a muscular body
+a napkin
+a nest
+a net
+a nut
+a pacifier
+a parent
+a pedal
+a pedestrian
+a person
+a petal
+a phone
+a pillow
+a plant
+a plate
+a pointed nose
+a pointed or peaked top
+a pond
+a pop-top or screw-top lid
+a pot
+a pothole
+a protruding muzzle
+a recycling bin
+a red or dark brown color
+a reel
+a river
+a rocket engine
+a rod
+a round or oval body
+a rounded crown of leaves
+a rugged, uneven surface
+a screw-top or corked top
+a seat
+a seat affixed to the frame
+a sidewalk
+a silo
+a small body
+a small head
+a small mouth
+a small opening at the top
+a small, delicate flower
+a small, furry body
+a small, hard shell
+a small, rodent-like body
+a smell
+a soft, round head
+a space shuttle
+a spaceship
+a spile
+a spray
+a stand
+a stem
+a stop sign
+a stove
+a street light
+a stripe
+a striped pattern on the back
+a stroller
+a sturdy base
+a sturdy build
+a suit
+a sweet fragrance
+a table
+a tall stature
+a tall, slender trunk
+a tall, upright posture
+a tap
+a thorn
+a tire
+a torso
+a toy
+a tractor
+a trash can
+a tree
+a trunk
+a trunk with thick, rough bark
+a uniform color
+a vase
+a watering can
+a window
+a woman
+a zoo
+able to climb trees
+acorns
+acorns on the ground beneath
+an acorn
+antennae
+ape
+arthropod
+bait
+birds
+black and white coloration
+broad shoulders
+brown, gray, or red fur
+butter
+container
+eight legs
+fins at the other end
+flower
+food
+front paws that resemble hands
+fruit
+fur covering the body
+furniture
+grass
+green leaves
+human
+intended for sleeping on
+invertebrate
+large ears
+large eyes
+large fins
+large scales
+leaves
+lemon
+location
+long arms
+long, thin leaves
+made of asphalt or concrete
+male
+mammal
+markings for lanes
+mode of transportation
+no pattern or design
+nuts
+object
+ordinary
+organism
+outdoor
+path
+pedals
+pedals attached to the frame
+person
+pillows
+pointed at one end
+pointed ears
+pointed snout
+propulsion at the back
+rodent
+roots
+seaweed
+sharp claws
+short legs
+simple
+simple, unadorned design
+small eyes
+small nose
+smooth, gray bark
+the ocean
+thorns
+thorny branches
+three-lobed leaves
+tiny hands and feet
+tiny mouth
+tool
+transportation
+trees
+two arms and two legs
+two large claws
+two small eyes on stalks
+two wheels of equal size
+unadorned
+vertebrate
+visibly male genitalia
+water
+way
+winged seeds
