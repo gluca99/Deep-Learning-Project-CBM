@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-nvidia-smi
-source activate ~/concept-driven-continual-learning/conda_env/merge_env
+#nvidia-smi
+ROOT=Deep-Learning-Project-CBM
+conda init
+conda activate denv
 echo "python training"
 con_method=c1
 MODEL=resnet18
@@ -12,9 +14,9 @@ ewc_lambda=0.2
 spar_lam=0
 mem=150
 nonlinear=True
-pretrain=True
+pretrain=none
 dif=False
-download_data=~/concept-driven-continual-learning/download_data
+download_data=~/${ROOT}/download_data
 
 task_num=5
 
@@ -29,8 +31,8 @@ SAVE_DIR=~/result/cc_cbm/
 for ((i=0; i<$task_num; i++));
 do
 DATASET=${dataset}_task_${i}_${task_num}_${SEED}
-concept_path=~/concept-driven-continual-learning/sandbox-lf-cbm/data/concept_sets/${dataset}_task_${i}_${task_num}_${SEED}_filtered.txt
-python ~/concept-driven-continual-learning/sandbox-lf-cbm/train_cbm.py --nonlinear ${nonlinear} --seed ${SEED} --gamma ${gamma} --solver ${solver} --lam ${spar_lam} --concept_method ${con_method} --dataset ${DATASET} --concept_set ${concept_path} --save_dir ${SAVE_DIR} --freeze_wc ${freeze} --normalize_wf ${nor_wf} 
+concept_path=~/${ROOT}/sandbox-lf-cbm/data/concept_sets/${dataset}_task_${i}_${task_num}_${SEED}_filtered.txt
+python ~/${ROOT}/sandbox-lf-cbm/train_cbm.py --nonlinear ${nonlinear} --seed ${SEED} --gamma ${gamma} --solver ${solver} --lam ${spar_lam} --concept_method ${con_method} --dataset ${DATASET} --concept_set ${concept_path} --save_dir ${SAVE_DIR} --freeze_wc ${freeze} --normalize_wf ${nor_wf} 
 done
 
-python ~/concept-driven-continual-learning/sandbox-lf-cbm/evaluate_cbm.py --task_num ${task_num} --dataset ${dataset} --seed ${SEED} --save_dir ${SAVE_DIR}  --nonlinear ${nonlinear}
+python ~/${ROOT}/sandbox-lf-cbm/evaluate_cbm.py --task_num ${task_num} --dataset ${dataset} --seed ${SEED} --save_dir ${SAVE_DIR}  --nonlinear ${nonlinear}
