@@ -27,6 +27,7 @@ parser.add_argument("--normalize_wf",type=str,default="False")
 parser.add_argument("--normalize_wf_method",type=str,default="all")
 parser.add_argument("--backbone", type=str, default="resnet18_places", help="Which pretrained model to use as backbone")
 parser.add_argument("--clip_name", type=str, default="ViT-B/16", help="Which CLIP model to use")
+parser.add_argument("--pretrain", action='store_true', help="flag to use pretrained backbone")
 
 parser.add_argument("--device", type=str, default="cuda", help="Which device to use")
 parser.add_argument("--batch_size", type=int, default=512, help="Batch size used when saving model/CLIP activations")
@@ -88,22 +89,22 @@ def train_cbm_and_save(args):
         os.makedirs(args.save_dir)
     if args.concept_set==None:
         args.concept_set = "data/concept_sets/{}_gpt3_ensemble2.txt".format(args.dataset)
-        
+    import pdb
     similarity_fn = similarity.cos_similarity_cubed_single
     
     d_train = args.dataset + "_train"
     d_val = args.dataset + "_val"
-    
+    print("a",flush=True)
     #get concept set
-    cls_file="./sandbox-lf-cbm/data/%s_classes.txt" % (args.dataset)
+    #cls_file="./sandbox-lf-cbm/data/%s_classes.txt" % (args.dataset)
     #cls_file = data_utils.LABEL_FILES[args.dataset]
-    print("Classes:",cls_file)
-    with open(cls_file, "r") as f:
-        classes = f.read().split("\n")
+    # print("Classes:",cls_file)
+    # with open(cls_file, "r") as f:
+    #     classes = f.read().split("\n")
     
     with open(args.concept_set) as f:
         concepts = f.read().split("\n")
-    
+    print(f"Length of concepts {len(concepts)}")
     seg=args.dataset.split("_")
     #CBM Continual
     task=int(seg[2])
@@ -117,21 +118,22 @@ def train_cbm_and_save(args):
                 inter_concept_pre=f.read().split("\n")
             concepts=rearrange_list(concepts,inter_concept_pre)
 
-    
+    print("b",flush=True)
     local_activation_dir=args.save_dir+"/"+args.activation_dir
     #save activations and get save_paths
     for d_probe in [d_train, d_val]:
         utils.save_activations(clip_name = args.clip_name, target_name = args.backbone, 
                                target_layers = [args.feature_layer], d_probe = d_probe, seed=args.seed, train1=args.train1,
-                               concept_set = args.concept_set, batch_size = args.batch_size, 
+                               concept_set = args.concept_set, batch_size = args.batch_size, pretrain=args.pretrain,
                                device = args.device, pool_mode = "avg", save_dir = local_activation_dir,words=concepts)
 
-        
+    print("c",flush=True)
     target_save_name, clip_save_name, text_save_name = utils.get_save_names(args.clip_name, args.backbone, 
                                             args.feature_layer,d_train, args.concept_set, "avg", local_activation_dir)
     val_target_save_name, val_clip_save_name, text_save_name =  utils.get_save_names(args.clip_name, args.backbone,
                                             args.feature_layer, d_val, args.concept_set, "avg", local_activation_dir)
-    
+    print("d",flush=True)
+    print(f"target_save_name: {target_save_name}")
     #load features
     with torch.no_grad():
         target_features = torch.load(target_save_name, map_location="cpu").float()
@@ -295,7 +297,7 @@ def train_cbm_and_save(args):
                 print("Deleting {}, Iterpretability:{:.3f}".format(concept, sim[i]))
     
     concepts = [concepts[i] for i in range(len(concepts)) if interpretable[i]]
-    
+
     del clip_features, val_clip_features
     if (args.nonlinear=='False'):
         W_c = proj_layer.weight[interpretable]
@@ -356,8 +358,8 @@ def train_cbm_and_save(args):
         proj_layer.cbl.weight=W_c.cbl.weight
         
     
-    train_targets = data_utils.get_targets_only(d_train,args.seed)
-    val_targets = data_utils.get_targets_only(d_val,args.seed)
+    train_targets = data_utils.get_targets_only(d_train,args.seed)[:1000]
+    val_targets = data_utils.get_targets_only(d_val,args.seed)[:1000]
     
     with torch.no_grad():
         train_c = proj_layer(target_features.detach())

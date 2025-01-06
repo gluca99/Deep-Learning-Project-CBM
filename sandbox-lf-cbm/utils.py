@@ -77,32 +77,35 @@ def save_clip_text_features(model, text, save_name, batch_size=1000):
     return
 
 def save_activations(clip_name, target_name, target_layers, d_probe,seed,train1, 
-                     concept_set, batch_size, device, pool_mode, save_dir,words):
+                     concept_set, batch_size, pretrain, device, pool_mode, save_dir,words):
     
-    
+    print("save ###a")
     target_save_name, clip_save_name, text_save_name = get_save_names(clip_name, target_name, 
                                                                     "{}", d_probe, concept_set, 
                                                                       pool_mode, save_dir)
+    print("save ###b")
     save_names = {"clip": clip_save_name, "text": text_save_name}
     for target_layer in target_layers:
         save_names[target_layer] = target_save_name.format(target_layer)
-        
+    print(save_names)
+    print("save ###c")
     if _all_saved(save_names):
         return
-    
+    print("save ###d")    
     clip_model, clip_preprocess = clip.load(clip_name, device=device)
-    
+    print("save ###e")
     if target_name.startswith("clip_"):
         target_model, target_preprocess = clip.load(target_name[5:], device=device)
     else:
-        target_model, target_preprocess = data_utils.get_target_model(target_name,d_probe,seed,train1, device)
+        target_model, target_preprocess = data_utils.get_target_model(target_name,d_probe,seed,train1,pretrain,device)
+    print("save ###f")
     #setup data
     data_c, data_t = data_utils.get_data(d_probe,seed, clip_preprocess, target_preprocess)
-
+    print("save ###g")
     text = clip.tokenize(["{}".format(word) for word in words]).to(device)
     
     save_clip_text_features(clip_model, text, text_save_name, batch_size)
-    
+    print("save ###h")
     save_clip_image_features(clip_model, data_c, clip_save_name, batch_size, device)
     if target_name.startswith("clip_"):
         save_clip_image_features(target_model, data_t, target_save_name, batch_size, device)
