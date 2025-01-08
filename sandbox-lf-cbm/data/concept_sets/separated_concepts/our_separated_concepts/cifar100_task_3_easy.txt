@@ -1,0 +1,322 @@
+2 small wings
+6 legs
+a baby
+a basket
+a beach
+a beard (in some cases)
+a bee
+a bird
+a bird feeder
+a blanket
+a bottle
+a bouquet
+a branch
+a bridle
+a bug
+a bulbous shape
+a bus
+a bus driver
+a bus fare
+a bus lane
+a bus pass
+a bus route
+a bus schedule
+a bus shelter
+a bus sign
+a bus stop
+a bus ticket
+a butterfly
+a cab for passengers
+a can of Raid
+a car
+a caravan
+a career
+a child
+a city
+a cocoon
+a compost bin
+a conductor
+a crib
+a dark brown or black color
+a deep voice
+a deer
+a den
+a desert
+a desert animal
+a desert environment
+a diaper
+a dirty floor
+a dirty kitchen
+a dog
+a driveway
+a family
+a father
+a fish
+a flat, circular shape
+a flower
+a fly
+a forest
+a fork
+a fresh, earthy smell
+a garage
+a garden
+a green or brown shell
+a hard shell
+a head
+a highway
+a hitch
+a hole in the wall
+a house
+a hump
+a humped back
+a job
+a knife
+a lake
+a large mouth with sharp teeth
+a large number of trees
+a large, boxy body
+a large, boxy shape
+a large, colorful bloom
+a large, colorful flower
+a large, elongated body
+a large, green body
+a large, humped body
+a large, metal engine
+a large, metal vehicle
+a large, rectangular body
+a large, rounded bottom
+a lead
+a leaf
+a leafy floor
+a light or dark color
+a load of dirt
+a load of hay
+a load of lumber
+a locomotive
+a locomotive at the front
+a log
+a long hood
+a long length
+a long neck
+a long snout
+a long stem
+a long stem with thorns
+a long tail
+a long, bushy tail
+a long, curved neck
+a long, prehensile tail
+a long, rectangular body
+a long, slender body
+a long, thick tail
+a long, thin abdomen
+a long, thin antennae
+a long, thin body
+a loud horn
+a mammal
+a mask
+a mother
+a mother possum
+a muscular body
+a mushroom
+a napkin
+a neck
+a nut
+a oasis
+a pacifier
+a parent
+a parking lot
+a path
+a person
+a petal
+a phone
+a plant
+a pointed snout
+a pointed top
+a pond
+a raised edge
+a rider
+a rim around the edge
+a river
+a roach motel
+a roach trap
+a road
+a rock
+a saddle
+a schedule
+a segmented body
+a shadow
+a shell
+a short tail
+a short, stubby stem
+a sidewalk
+a small body
+a small head
+a small mouth
+a small, dark body
+a small, flat body
+a small, furry body
+a small, narrow neck
+a small, pointed top
+a small, round body
+a small, round or oval shape
+a smooth or bumpy surface
+a smooth surface
+a soft, round head
+a spade
+a spoon
+a spray bottle
+a squirrel
+a stem
+a stem protruding from the top
+a stream
+a street
+a stroller
+a strong scent
+a sturdy material
+a swamp
+a sweet fragrance
+a sweet, juicy flesh
+a table
+a tail
+a tall stature
+a tall, rectangular shape
+a tall, upright posture
+a tarp
+a teardrop-shaped body
+a thorn
+a ticket
+a torso
+a tow rope
+a toy
+a track
+a tracks
+a trail
+a trailer
+a trash can
+a tree
+a truck
+a uniform color
+a vase
+a web
+a white or brown color
+a woman
+a worm
+a worm bin
+a wormery
+able to climb trees
+acorns
+an open bed in the back
+animal
+arachnid
+arthropod
+baby possums
+beady eyes
+biome
+black eyes
+broad shoulders
+brown, gray, or red fur
+building
+buildings
+bushes
+can be a variety of colors
+carnivore
+cars
+compost
+container
+dense vegetation
+dirt
+dish
+ecosystem
+eight eyes
+eight legs
+eight long legs
+fang-like mouthparts
+flatware
+flower
+food
+four legs
+four wheels
+front paws that resemble hands
+fruit
+fungus
+gills on the underside
+gloves
+grass
+gray or brown fur
+greenish-brown color
+habitat
+hairy or spiny legs
+human
+insect
+invertebrate
+large eyes
+large size
+large wheels
+large windows
+leaves
+logs
+long and slender
+long legs
+long, antennae-like feelers
+long, spiny legs
+lots of smoke
+lots of windows
+made of steel and glass
+male
+mammal
+many legs
+marsupial
+moves by wriggling
+multiple doors
+multiple rows of windows
+no legs
+nuts
+object
+often brightly colored
+often found in the dirt
+often has a point at the top
+often has stripes or spots
+organism
+passenger cars
+passengers
+pedestrians
+people
+person
+plant
+pointed ears
+pointed snout
+reptile
+rocks
+rodent
+sand
+scratches
+seeds in the center
+shade from the trees
+sharp claws
+sharp teeth
+sharply claws
+short legs
+slow movement
+small nose
+smooth, green skin
+smooth, straight lines
+soil
+streets
+structure
+thorns
+thorny branches
+tiny hands and feet
+tiny mouth
+transportation
+trees
+truck
+trucks
+two arms and two legs
+two doors
+two feelers
+two large, compound eyes
+vehicle
+vertebrate
+visibly male genitalia
+water
+wildlife
