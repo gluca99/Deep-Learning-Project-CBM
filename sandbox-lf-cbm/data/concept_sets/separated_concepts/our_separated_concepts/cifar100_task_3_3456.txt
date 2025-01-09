@@ -5,33 +5,25 @@ a barn
 a beach
 a beard (in some cases)
 a bed frame
-a bedside table
 a bib
 a bicycle seat
-a bike
 a bird
 a bird feeder
 a black and white color scheme
 a blanket
-a bottle
 a bottle opener
 a bouquet
 a box spring
 a branch
-a bright color
 a bright, red color
 a bucket
 a cage
 a can opener
-a car
 a career
 a chain
-a chair
 a child
-a chimpanzee
 a coaster
 a comforter
-a comforter or blanket
 a computer
 a computer screen
 a control room
@@ -46,26 +38,21 @@ a crib
 a crosswalk
 a cupboard
 a curb
-a cylindrical shape
 a deep voice
 a deep, dark color
 a delicate, colorful flower
 a desk
 a diaper
-a dog
 a drill
 a drink
 a family
 a farm
-a father
 a fence
 a field
 a fish
 a footboard
-a forest
 a fork
 a forked tail
-a foul smell
 a frame
 a frame connecting the wheels
 a fridge
@@ -75,59 +62,36 @@ a greenhouse
 a handlebar
 a hard exoskeleton
 a hard, crustacean body
-a hard, exoskeleton shell
 a headboard
 a helmet
 a hole in the ground
 a hook
-a house
 a job
 a jungle
 a keeper
-a keyboard
 a kitchen
 a knife
 a label
-a label or design
-a lamp
-a large body
-a large, colorful bloom
-a large, colorful flower
 a large, flat surface
 a large, lobster-like creature
 a large, rocky mass
-a large, tall tree
 a launch
 a launchpad
 a lawn
 a leaf
 a lid or opening at the top
 a light purple or white color
-a lobster
 a lobster cracker
 a lobster trap
 a lock
-a long stem
 a long stem with thorns
-a long tail
-a long, bushy tail
 a long, cylindrical shape
-a long, flat surface
-a long, naked tail
-a long, narrow shape
-a long, segmented tail
-a long, slender body
 a long, straight path
-a long, thin body
 a long, thin neck
 a mattress
 a meal
 a metal or plastic body
-a metal or plastic exterior
-a mother
 a mouse pad
-a mousepad
-a muscular body
 a napkin
 a nest
 a net
@@ -141,9 +105,6 @@ a petal
 a phone
 a pillow
 a plant
-a plate
-a pointed nose
-a pointed or peaked top
 a pond
 a pop-top or screw-top lid
 a pot
@@ -153,11 +114,9 @@ a recycling bin
 a red or dark brown color
 a reel
 a river
-a road
 a rocket engine
 a rocket ship
 a rod
-a round or oval body
 a rounded crown of leaves
 a rugged, uneven surface
 a screw-top or corked top
@@ -165,24 +124,18 @@ a seat
 a seat affixed to the frame
 a sidewalk
 a silo
-a skunk
-a slender stem
-a small body
 a small head
 a small mouth
 a small opening at the top
 a small, delicate flower
 a small, furry body
-a small, hard shell
 a small, rodent-like body
-a small, round head
 a smell
 a soft, round head
 a space shuttle
 a spaceship
 a spile
 a spray
-a squirrel
 a stand
 a stem
 a stop sign
@@ -191,15 +144,10 @@ a street light
 a stripe
 a striped pattern on the back
 a stroller
-a strong scent
-a strong smell
 a sturdy base
-a sturdy build
 a suit
 a sweet fragrance
-a table
 a tall stature
-a tall, slender trunk
 a tall, sturdy trunk
 a tall, upright posture
 a tap
@@ -207,7 +155,6 @@ a thorn
 a tire
 a torso
 a toy
-a tractor
 a trash can
 a tree
 a trunk
@@ -216,44 +163,32 @@ a uniform color
 a vase
 a watering can
 a window
-a woman
 a zoo
 able to climb trees
 acorns
 acorns on the ground beneath
 an acorn
-animal
 antennae
 ape
 arthropod
 bait
 birds
 black and white coloration
-branches
 broad shoulders
-brown, gray, or red fur
 butter
 container
 crustacean
-dark green leaves
 eight legs
-fins at the base
 fins at the other end
-fish
-flower
-food
 front paws that resemble hands
 fruit
 fur covering the body
 furniture
-furry body
 grass
 green leaves
-handlebars
 human
 intended for sleeping on
 invertebrate
-large ears
 large eyes
 large fins
 large scales
@@ -274,19 +209,15 @@ object
 ordinary
 organism
 outdoor
-path
 pedals
 pedals attached to the frame
 person
 pillows
-plant
 pointed at one end
 pointed ears
-pointed nose
 pointed snout
 primate
 propulsion at the back
-red or brown color
 rodent
 roots
 seaweed
@@ -294,31 +225,20 @@ sharp claws
 short legs
 simple
 simple, unadorned design
-six legs
-small black eyes
-small eyes
 small nose
 smooth, gray bark
-squirrels
-street
-the ocean
 thorns
 thorny branches
 three-lobed leaves
-tiny hands and feet
 tiny mouth
 tool
 transportation
-tree
 trees
 two arms and two legs
-two eyes on stalks
 two large claws
-two large, pincer-like claws
 two small eyes on stalks
 two wheels of equal size
 unadorned
-vehicle
 vertebrate
 visibly male genitalia
 water

@@ -3,40 +3,29 @@ a alarm clock
 a backrest
 a barn
 a bed frame
-a bedside table
-a bicycle
 a bicycle seat
 a bicyclist
-a bike
 a bike lane
 a blade or blades
 a blanket
 a body of water
 a box spring
-a bright color
 a bright, red color
-a bus
 a bus driver
 a bus fare
 a bus lane
 a bus pass
-a bus route
 a bus schedule
 a bus shelter
 a bus sign
 a bus stop
-a bus ticket
-a cab for passengers
 a cab for the driver
-a car
 a chain
-a chair
 a chimney
 a city
 a coffee table
 a comfortable design
 a comforter
-a comforter or blanket
 a computer
 a conductor
 a control room
@@ -46,7 +35,6 @@ a courtyard
 a crew of astronauts
 a crosswalk
 a cultivator
-a cup
 a curb
 a desk
 a door
@@ -59,7 +47,6 @@ a farm
 a farmer
 a field
 a flag
-a flat surface
 a floor
 a footboard
 a fork
@@ -79,23 +66,15 @@ a harrow
 a headboard
 a heavy, metal body
 a helmet
-a highway
 a hitch
 a hitch for pulling trailers
-a house
 a keep
 a knife
-a lamp
-a large, boxy body
 a large, boxy shape
-a large, bulky body
 a large, flat surface
 a large, imposing structure
-a large, metal engine
-a large, metal vehicle
 a large, powerful engine
 a large, rectangular body
-a large, rectangular shape
 a launch
 a launchpad
 a lawn
@@ -106,13 +85,9 @@ a load of hay
 a load of lumber
 a lock
 a locomotive
-a locomotive at the front
 a long hood
 a long length
 a long, cylindrical shape
-a long, flat surface
-a long, narrow body
-a long, rectangular body
 a long, straight path
 a loud horn
 a mattress
@@ -120,10 +95,8 @@ a military vehicle
 a mirror
 a moat
 a motor
-a motorcycle
 a motorcycle license
 a office
-a pair of pants
 a pants
 a parking lot
 a pedal
@@ -132,17 +105,13 @@ a person
 a pillow
 a pitched roof
 a place mat
-a plate
 a platform at one end
 a plow
-a pointed nose
-a pointed top
 a portcullis
 a pothole
 a rake
 a remote control
 a river
-a road
 a rocket engine
 a rocket ship
 a roof
@@ -150,7 +119,6 @@ a room
 a schedule
 a seat
 a seat affixed to the frame
-a seat for a person
 a seat for the rider
 a shirt
 a shovel
@@ -166,26 +134,19 @@ a steering wheel
 a stop sign
 a street
 a street light
-a streetcar
 a structure that spans a gap
-a sturdy construction
-a sturdy frame
 a suit
-a table
 a tall, rectangular shape
-a tank
 a tarp
 a ticket
 a tire
 a tow rope
 a tower
 a track
-a tracks
 a tractor trailer
 a traffic light
 a trailer
 a tree
-a truck
 a uniform
 a uniform color
 a vehicle
@@ -193,35 +154,24 @@ a wall
 a wide, flat front
 a yard
 an open bed in the back
-armrests (optional)
 armrests on either side
 blades for cutting grass
 building
-buildings
 cars
 chickens
-clothes
 container
-cows
 doors
 exhaust pipes
-fields
-fins at the base
 fins at the other end
-four legs for support
 four wheels
 furniture
 garden equipment
 grass
-handlebars
 hangers
 insurance
 intended for sleeping on
-large size
 large wheels
 large windows
-large, powerful wheels
-lawn equipment
 legs or support underneath
 legs to support the seat
 location
@@ -231,7 +181,6 @@ lots of windows
 machine
 made of asphalt or concrete
 made of metal or glass
-made of steel and glass
 made of stone or brick
 man-made object
 markings for lanes
@@ -246,7 +195,6 @@ often has towers and turrets
 outdoor
 passenger cars
 passengers
-path
 pedals
 pedals attached to the frame
 pedestrians
@@ -263,26 +211,18 @@ siding or brick exterior
 smooth, straight lines
 stone walls
 storage
-street
 streets
 structure
-surrounded by a moat
 tool
 tracks for wheels
 tram
 transportation
-truck
-trucks
 two doors
 two wheels
 two wheels of equal size
-used to hold liquids or gas
 used to hold liquids or gases
 usually electric power
-usually has a lid
 usually has a lid or cover
-vehicle
-walls
 way
 wheels
 wheels for mobility

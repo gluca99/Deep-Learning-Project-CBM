@@ -8,52 +8,37 @@ a barn
 a basket
 a battery
 a beach
-a bed
-a bee
 a big, powerful jaw
 a bitter taste
 a black mask around the eyes
 a black, fur-covered nose
-a blossom
 a boat
 a body of water
 a bottom-dwelling lifestyle
-a bowl
-a boy
 a bracelet
 a branch
-a bright orange color
-a brown or black center
 a bull
-a bus
 a bus driver
 a bus fare
 a bus lane
 a bus pass
-a bus route
 a bus schedule
 a bus shelter
 a bus sign
 a bus stop
-a bus ticket
-a bushy tail
-a butterfly
 a cab for the driver
 a calf
 a carrot
-a clock face
 a cobra
 a compact
 a cow
 a cultivator
-a cup
 a den
 a desert
 a desk
 a dress
 a farm
 a farmer
-a female raccoon
 a feminine face
 a fence
 a field
@@ -61,8 +46,6 @@ a filter
 a fin on the back
 a fish
 a flattened body
-a fluffy tail
-a forest
 a fork
 a forked tongue
 a fruit bowl
@@ -85,36 +68,20 @@ a juicy interior
 a kitchen
 a knife
 a ladybug
-a large base
-a large body
-a large head
 a large yellow center
 a large, boxy shape
-a large, bulky body
 a large, muscular body
 a large, rocky mass
-a large, round head
 a large, yellow flower
 a lettuce
 a lid
 a light
 a long length
-a long snout
-a long tail
-a long, beak-like nose
-a long, bushy tail
 a long, curved nose
-a long, flowing tail
-a long, powerful tail
-a long, rectangular body
 a long, sinuous tail
-a long, skinny tail
-a long, thick stem
-a long, thin body
 a mask
 a mate
 a milkmaid
-a minute hand
 a mongoose
 a mottled brown or black coat
 a mountain bike
@@ -129,9 +96,7 @@ a pasture
 a peeler
 a person
 a phone
-a plate
 a plow
-a pointed head
 a pointed or jagged peak
 a pond
 a pot
@@ -140,44 +105,32 @@ a purse
 a python
 a red, green, or yellow color
 a reel
-a refrigerator
 a rim
 a ring
 a rock
 a rod
 a rough, craggy surface
-a round or oval shape
-a round or rectangular shape
-a round shape
 a safari
 a sandy or brown coloration
 a saucer
 a second hand
 a short, stubby tail
 a sleek, gray body
-a sleek, streamlined body
 a slender body
 a small leaf at the top
 a small mouth
 a small, furry body
 a small, pointed face
-a small, pointed head
-a small, pointed muzzle
 a small, pointed nose
-a small, round body
 a small, round shape
 a smooth surface
-a snake
 a snake charmer
-a soft voice
 a spoon
 a steep slope
 a steering wheel
 a stem
 a stocky body
 a sturdy base
-a table
-a tail
 a tail in the back
 a thief
 a towering height
@@ -194,45 +147,30 @@ a wide, flat front
 a yellow or gold color
 a zoo
 an Outback
-an apple
 an aquarium
 an electrical outlet
 an hour hand
 an ocean
-animal
-aquarium
 aquatic animal
 bait
 black markings around the eyes
-brown or gray fur
 bushes
 can live in a confined space
 chickens
-child
 chordate
 coffee
 container
-cows
 cubs
-cup
 dirt
 earrings
 exhaust pipes
 facial hair
-female
-fields
-fish
-flippers
 flippers on the sides
-flower
-food
 four legs
 fruit
 garbage
 geographic feature
-glass
 grass
-grey or black fur
 hands
 hay
 her young
@@ -243,19 +181,15 @@ lagomorph
 landform
 landmass
 large fins
-large size
 large wheels
 large windows
 large, black eyes
 large, four-legged mammal
 large, green leaves
-large, muscular hind legs
 large, pointy ears
-large, powerful wheels
 lateral symmetry
 leaves
 lipstick
-livestock
 long ears
 long hair
 long tail
@@ -266,52 +200,37 @@ marsupial
 milk
 multiple doors
 multiple rows of windows
-muzzle
 natural feature
 no legs
 numbers
 object
-ocean
 orange fins
 orange or red fur
 organism
 person
-plant
 plants
 pointed ears
-prey
 pups
-red, green, or yellow color
-reddish brown fur
-reptile
 rocks
-round shape
 sand
 scales
 seagulls
 seaweed
-short front legs
 short legs
 short, furry legs
 smooth skin
-smooth, shiny skin
 snow-capped peaks
 soil
 sugar
 tea
 terrain
-the forest
-the ocean
 time
 timepiece
 transportation
-trash cans
 trees
 two or more hands
 usually bottom-dwelling
 usually cryptic coloration
-vehicle
 vertebrate
 wears makeup
-wears revealing clothes
 webbed feet

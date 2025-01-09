@@ -1,9 +1,6 @@
-2 small wings
-6 legs
 a ball
 a bathing suit
 a beach
-a bee
 a bee suit
 a beekeeper
 a bib
@@ -15,11 +12,9 @@ a bottom-dwelling lifestyle
 a branch
 a bucket
 a bug
-a butterfly
 a cage
 a can of Raid
 a captain
-a caterpillar
 a cocoon
 a compost bin
 a crab pot
@@ -28,7 +23,6 @@ a crabbing net
 a crabbing trap
 a crew
 a dam
-a dark brown or black color
 a dirty floor
 a dirty kitchen
 a diving suit
@@ -40,15 +34,12 @@ a fish
 a flattened body
 a flower
 a fly
-a forest
 a fork
 a forked tail
 a frame
 a garden
 a hard exoskeleton
-a hard shell
 a hard, crustacean body
-a hard, exoskeleton shell
 a hard, outer shell
 a harpoon
 a hat
@@ -57,45 +48,27 @@ a hive
 a hive tool
 a hole in the wall
 a hook
-a house
 a jar
 a kit
 a knife
 a lake
-a large body
-a large mouth with sharp teeth
-a large, flat body
 a large, lobster-like creature
 a large, ocean-dwelling mammal
 a large, predatory fish
-a large, rodent-like body
 a large, spiral shell
-a large, stocky body
 a large, triangular fin
 a leaf
 a lifeguard
 a light
-a lobster
 a lobster cracker
 a lobster trap
 a lodge
 a log
-a long body
-a long snout
-a long tail
-a long, beak-like nose
-a long, coiled tail
 a long, curved nose
-a long, flowing tail
-a long, segmented tail
 a long, sinuous tail
-a long, skinny tail
-a long, slender body
-a long, slim body
 a long, tapered tail
 a long, thin abdomen
 a long, thin antennae
-a long, thin body
 a long, whip-like tail
 a magnifying glass
 a mask
@@ -106,7 +79,6 @@ a pair of wings
 a person
 a pin
 a plant
-a plate
 a pond
 a pot
 a red or dark brown color
@@ -123,19 +95,11 @@ a shark fin
 a shell
 a short, stubby tail
 a sleek, gray body
-a sleek, streamlined body
 a slime trail
-a small body
 a small head
 a small mouth
-a small, dark body
-a small, flat body
-a small, hard shell
-a small, pointed head
-a small, round body
 a small, slimy body
 a smoker
-a soft, slimy body
 a spade
 a spray bottle
 a stove
@@ -144,7 +108,6 @@ a streamlined body
 a super
 a surfboard
 a swimmer
-a tail
 a tail in the back
 a towel
 a trash can
@@ -155,106 +118,76 @@ a veil
 a web
 a wet suit
 a whalebone
-a wide, flat tail
-a worm
 a worm bin
 a wormery
 an aquarium
 an ocean
-animal
 antennae
-aquarium
 aquatic animal
-arachnid
 arthropod
 bait
 black and yellow stripes
 brightly colored wings
-brown fur
 butter
 can be a variety of colors
 can live in a confined space
 compost
 crustacean
-dark brown fur
 dirt
 eight eyes
 eight legs
-eight long legs
 fang-like mouthparts
-fish
-flippers
 flippers on the sides
 flowers
-food
 gastropod
 gloves
 grass
 gray or blue color
 hairy or spiny legs
-insect
 invertebrate
 large eyes
 large fins
 large scales
 large, black eyes
-large, flat tail
 large, sharp teeth
 large, wing-like fins
 lateral symmetry
 leaves
 lemon
-long antennae
 long, antennae-like feelers
 long, brown fur
 long, spiny legs
 mammal
 many legs
 mollusc
-mollusk
 moves by wriggling
 no legs
-ocean
 often brightly colored
 often found in the dirt
 often has stripes or spots
 orange fins
-other whales
 people
 plants
-red or brown color
 rocks
 rodent
 sand
 seagulls
 seaweed
 sharp front teeth
-sharp teeth
 short legs
-six legs
 slime
 slow movement
-small eyes
 small, round ears
-smooth, shiny skin
 soil
 sunglasses
 sunscreen
 suntan lotion
-the ocean
-the sea
 trees
-two antennae
-two eyes on stalks
 two feelers
 two large claws
 two large, compound eyes
-two large, pincer-like claws
-two large, wings
-two pairs of wings
 two small eyes on stalks
 two small, beady eyes
-two wings
 usually bottom-dwelling
 usually cryptic coloration
 various color patterns
@@ -262,6 +195,4 @@ various sizes and shapes
 vertebrate
 water
 webbed feet
-webbed hind feet
 wing covers
-yellow and black stripes

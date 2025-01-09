@@ -4,33 +4,19 @@ a base unit with a speaker
 a basket
 a bathing suit
 a beach
-a bee
-a beetle
-a bicycle
-a bike
 a bird
 a bitter taste
 a black center
-a black or dark center
 a blowhole
 a boat
 a body of water
-a bowl
 a branch
-a bright color
-a bright orange color
-a bright red or orange color
 a bright, red color
 a bug
-a bulb
 a bush
-a bushy tail
-a butterfly
 a cage
 a can opener
 a captain
-a car
-a chair
 a cobra
 a control room
 a cord
@@ -40,9 +26,7 @@ a courtyard
 a crew
 a crew of astronauts
 a cricket
-a cup
 a cupboard
-a cylindrical shape
 a deep body
 a deep, dark color
 a den
@@ -56,7 +40,6 @@ a field
 a flag
 a flattened body
 a fluffy, white appearance
-a forest
 a fork
 a forked tongue
 a fridge
@@ -64,28 +47,21 @@ a fruit bowl
 a gate
 a grocery store
 a gun
-a handset
 a hard exoskeleton
 a hard, outer shell
 a harpoon
 a hat
 a helmet
-a house
 a jar
 a juicy interior
 a keep
 a keypad on one side
 a kitchen
 a knife
-a label or design
-a large body
-a large mouth with sharp teeth
-a large, flat body
 a large, flat surface
 a large, imposing structure
 a large, ocean-dwelling mammal
 a large, predatory fish
-a large, rectangular shape
 a large, rocky mass
 a large, triangular fin
 a launch
@@ -93,27 +69,16 @@ a launchpad
 a leaf
 a lid or opening at the top
 a lifeguard
-a light bulb
-a lightbulb
-a lizard
-a long body
-a long snout
-a long tail
-a long, bushy tail
 a long, cylindrical shape
-a long, slender body
-a long, thin body
 a long, whip-like tail
 a magnifying glass
 a mate
 a meal
 a metal or plastic body
-a metal or plastic exterior
 a military vehicle
 a moat
 a mongoose
 a moon
-a mouse
 a net
 a number pad
 a pack
@@ -125,30 +90,20 @@ a person
 a petal
 a phone
 a phone book
-a phone cord
 a pin
 a plane
-a plate
 a plug
-a pointed head
-a pointed nose
-a pointed or peaked top
 a pop-top or screw-top lid
 a portcullis
-a power cord
 a python
 a recycling bin
 a red or orange color
-a refrigerator
 a rim around the top
 a river
-a road
 a rock
 a rocket engine
 a rocket ship
 a room
-a round or oval shape
-a round shape
 a rugged, uneven surface
 a segmented body
 a shade
@@ -159,10 +114,8 @@ a sleek, gray body
 a small opening at the top
 a small, pointed face
 a small, pointed nose
-a small, rectangular shape
 a small, round shape
 a smooth surface
-a snake
 a snake charmer
 a socket
 a soldier
@@ -171,7 +124,6 @@ a spaceship
 a spoon
 a star
 a stem
-a stem with green leaves
 a streamlined body
 a structure that spans a gap
 a suit
@@ -179,16 +131,11 @@ a sun
 a surfboard
 a swimmer
 a switch
-a table
-a tail
-a tank
 a thin, papery texture
 a towel
 a tower
-a tractor
 a trash can
 a tree
-a truck
 a tweezers
 a uniform
 a uniform color
@@ -199,7 +146,6 @@ a wet suit
 a whalebone
 a wide opening
 amphibian
-animal
 arthropod
 atmosphere
 black markings around the eyes
@@ -216,24 +162,16 @@ dirt
 dish
 electronic device
 facial hair
-fins at the base
 fins at the other end
-fish
-flippers
 floating in the sky
-flower
 flowers
-food
 four legs
 fruit
 grass
 gray or blue color
-grey or black fur
-insect
 large, pointy ears
 large, wing-like fins
 leaves
-light
 lightning
 machine
 made of metal or glass
@@ -249,18 +187,13 @@ often has towers and turrets
 orange or red fur
 ordinary
 organism
-other whales
 people
 phenomenon
-plant
 pointed at one end
 pointed ears
-prey
 propulsion at the back
 pups
 rain
-reddish brown fur
-reptile
 reptilian skin
 rocks
 sand
@@ -268,21 +201,14 @@ scales
 scales on the skin
 seagulls
 several towers or turrets
-sharp teeth
 simple
 simple, unadorned design
-six legs
 sky
-small eyes
 stone walls
 structure
 sunglasses
 sunscreen
 suntan lotion
-surrounded by a moat
-the forest
-the ocean
-the sea
 the sky
 thunder
 tool
@@ -290,13 +216,10 @@ trees
 two feelers
 two small, beady eyes
 unadorned
-used to hold liquids or gas
 used to hold liquids or gases
-usually has a lid
 usually has a lid or cover
 various color patterns
 various sizes and shapes
-vehicle
 vertebrate
 water
 weather

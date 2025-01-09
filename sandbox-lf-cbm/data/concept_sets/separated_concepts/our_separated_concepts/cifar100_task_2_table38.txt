@@ -1,29 +1,22 @@
 5-7 black rings on the tail
 Africa
 a animal
-a baby
 a bandit
 a basket
 a beach
-a bed
-a beetle
 a big head
-a big head with a wide mouth
 a bird feeder
 a black and white color scheme
 a black mask around the eyes
 a book
-a bowl
 a branch
 a burrow
 a bush
-a bushy tail
 a cage
 a camera
 a carrot
 a cat
 a cave
-a chair
 a child
 a coat of sharp quills
 a cobra
@@ -35,28 +28,18 @@ a cub
 a den
 a desert
 a desk
-a dog
-a female raccoon
 a fish
-a fluffy tail
 a food dish
-a forest
 a forked tongue
-a foul smell
 a furry coat
 a green or brown shell
-a hard shell
 a hawk
-a head
 a hole in the ground
 a honeycomb
 a hutch
 a insect
 a keeper
-a keyboard
 a lake
-a large body
-a large mouth with sharp teeth
 a large size
 a large, elongated body
 a large, green body
@@ -65,43 +48,23 @@ a large, spotted body
 a leaf
 a lettuce
 a lioness
-a lithe, muscular body
-a lizard
 a log
 a long mane around the head
-a long neck
-a long snout
-a long tail
-a long, bushy tail
-a long, naked tail
-a long, pointed snout
-a long, prehensile tail
-a long, slender body
 a long, thick tail
-a long, thin body
 a mane
-a mane of thick, long hair
 a mask
 a mate
 a mongoose
-a mother
-a mother possum
-a mouse
 a mouse pad
-a mousepad
 a museum
 a neck
 a nut
 a pack
 a person
 a plant
-a pointed head
-a pointed snout
 a pond
-a porcupine
 a predator
 a prey
-a prey animal
 a pride
 a pride of lions
 a python
@@ -110,44 +73,31 @@ a reptilian appearance
 a river
 a roar
 a rock
-a round body
-a rounded body
 a shell
 a short muzzle
-a short tail
 a short, stubby tail
-a skunk
 a small head
 a small mammal
 a small, furry body
-a small, mouse-like body
 a small, plump body
 a small, pointed face
-a small, pointed muzzle
 a small, pointed nose
 a small, rodent-like body
-a small, round body
-a small, round head
 a smell
-a snake
 a snake charmer
 a snout
 a spiky coat
 a spray
-a squirrel
 a statue
 a stocky body
 a stripe
 a striped coat
 a striped pattern on the back
-a strong smell
 a swamp
-a tail
 a tawny or yellowish color
 a teacher
 a thief
 a toy
-a toys
 a tree
 a tunnel
 a twitchy nose
@@ -158,42 +108,29 @@ a zoo
 able to climb trees
 acorns
 amphibian
-animal
 baby possums
-beady eyes
 berries
 black and white coloration
-black and white coloring
-black eyes
 black markings around the eyes
 black spots on the coat
 bones
-brown, gray, or red fur
 bushes
 can change color
 carnivore
 chordate
-claws
 cubs
 facial hair
-food
 four legs
 front paws that resemble hands
-furry coat
 garbage
 good night vision
 grass
 gray or brown fur
 greenish-brown color
-grey or black fur
 hay
 her young
-jungle
 lagomorph
-large ears
-large size
 large, pointy ears
-large, round ears
 leaves
 long ears
 long tail
@@ -203,38 +140,24 @@ no legs
 nuts
 orange or red fur
 pointed ears
-pointed nose
 pointed snout
-powerful hind legs
-prey
 pups
-reddish brown fur
-reptile
 reptilian skin
 rocks
 rodent
 sand
 scales
 scales on the skin
-scales or plates on the skin
 scratches
 sharp claws
-sharp teeth
-sharp teeth and claws
-sharply claws
 short legs
 short, coarse fur
-short, stubby legs
 short, velvety fur
 slow movement
-small black eyes
-small eyes
 small eyes and ears
 striped fur
 the Serengeti
-the forest
 tiny feet
-trash cans
 trees
 vertebrate
 water

@@ -11,12 +11,10 @@ a basketball
 a bat
 a battery
 a beach
-a bed
 a bee suit
 a beekeeper
 a bicyclist
 a big head
-a bike
 a bird
 a black and white color scheme
 a black mask around the eyes
@@ -29,39 +27,28 @@ a branch
 a bright, red color
 a cab for the driver
 a cave
-a chair
 a city
-a clock face
 a coffee cup
 a coffee table
 a computer
 a cord or wireless connection
-a couch
 a crisp texture
-a crown of leaves
 a crown of leaves at the top
 a cultivator
-a cup
 a cutting board
 a deep blue or green color
 a den
 a desk
 a dock
-a dolphin
 a farm
 a farmer
-a female raccoon
 a field
 a fin on the back
 a fish
-a flat surface
-a flat, rectangular shape
 a flattened body
 a floor
 a flower
-a forest
 a fork
-a foul smell
 a frame
 a fridge
 a furry coat
@@ -80,82 +67,51 @@ a hole in the ground
 a honeycomb
 a hook
 a horizon
-a house
 a knife
-a large body
-a large body of water
-a large, bulky body
 a large, flat surface
 a large, rectangular screen
 a large, spotted body
-a large, tall tree
-a lithe, muscular body
 a living room
-a long tail
-a long, beak-like nose
-a long, bushy tail
 a long, curved nose
-a long, narrow body
-a long, rectangular body
 a long, sinuous tail
-a long, skinny tail
 a long, thin shape
 a male human child
 a mask
 a mild flavor
-a minute hand
 a monitor
-a mouse
 a nest
 a net
 a nightstand
-a ocean
 a office
-a pair of jeans
-a palm tree
 a pedestrian
 a person
 a pillow
 a place mat
 a plant
-a plate
 a platform at one end
 a playground
 a plow
 a pointed end
 a pond
-a power outlet
 a predator
 a prey
-a prey animal
-a rectangular shape
 a reel
 a remote control
 a river
 a rock
 a rod
 a room
-a round or oval shape
-a round or rectangular shape
 a sandy or brown coloration
 a school
 a scooter
-a sea
 a seagull
-a seat for a person
 a second hand
 a set of function keys
 a short muzzle
 a short, stubby tail
 a skateboard
-a skunk
 a sleek, gray body
-a sleek, streamlined body
 a small head
-a small, pointed head
-a small, pointed muzzle
-a small, round body
-a small, round head
 a smell
 a smoker
 a smooth surface
@@ -164,30 +120,21 @@ a soccer ball
 a sofa
 a spoon
 a spray
-a squirrel
 a stand or mount
 a steering wheel
 a stocky body
 a stop sign
 a street
-a streetcar
 a stripe
 a striped pattern on the back
-a strong smell
-a sturdy construction
 a sun
 a sunset
 a super
-a t-shirt
-a table
 a tail in the back
-a tall, slender trunk
 a tall, sturdy trunk
-a television
 a television stand
 a thief
 a toy
-a tracks
 a tractor trailer
 a traffic light
 a tree
@@ -198,7 +145,6 @@ a trunk with thick, rough bark
 a veil
 a wall
 a watering can
-a whale
 a wide, flat front
 acorns
 acorns on the ground beneath
@@ -206,10 +152,8 @@ an acorn
 an electrical outlet
 an hour hand
 an ocean
-animal
 appliance
 aquatic animal
-armrests (optional)
 arthropod
 bait
 berries
@@ -217,28 +161,17 @@ between the ages of 0 and 12
 birds
 black and white coloration
 black and yellow stripes
-body of water
-branches
 cables
 carnivore
 cars
 chickens
-child
-claws
 controls for power and volume
-cows
-dark green leaves
 device
 electronic
 exhaust pipes
-fields
-fish
-flippers
 flippers on the sides
 flowers
-food
 four legs
-four legs for support
 furniture
 garbage
 gloves
@@ -247,19 +180,14 @@ grass
 green leaves
 hands
 has a boyish face
-has a boyish haircut
 has a gender
 has a short haircut
 her young
-insect
 instrument
-jungle
 labels on the keys
 large fins
-large size
 large wheels
 large, black eyes
-large, powerful wheels
 lateral symmetry
 leaves
 leaves at the top of the tree
@@ -273,12 +201,9 @@ natural feature
 no branches
 numbers
 object
-ocean
 organism
 passengers
-pepper
 person
-plant
 rail vehicle
 rocks
 saltwater
@@ -286,38 +211,23 @@ sand
 seagulls
 seaweed
 sharp claws
-six legs
-small black eyes
 smooth skin
-smooth, glossy skin
 smooth, green bark
-smooth, shiny skin
-sneakers
 soil
 speakers
-squirrels
-tall with a slender trunk
-the ocean
 time
 timepiece
 tracks for wheels
 tram
 transportation
-trash cans
-tree
 trees
-two antennae
 two or more hands
-two pairs of wings
-two wings
 usually bottom-dwelling
 usually cryptic coloration
 usually electric power
 vegetable
-vehicle
 vertebrate
 water
 waves
 wears clothes
 webbed feet
-yellow and black stripes

@@ -6,32 +6,22 @@ a alarm clock
 a ball
 a beach
 a bed frame
-a bedside table
-a bee
 a bib
 a bicycle seat
-a big head with a wide mouth
 a big, powerful jaw
-a bike
 a blanket
-a blossom
-a bowl
 a box spring
-a boy
 a bracelet
 a branch
 a bucket
 a burrow
 a cage
-a car
 a carrot
-a caterpillar
 a chain
 a child
 a circus
 a coat of sharp quills
 a comforter
-a comforter or blanket
 a compact
 a crab pot
 a crabbing line
@@ -51,9 +41,7 @@ a feminine face
 a filter
 a fish
 a flower
-a fluffy tail
 a footboard
-a forest
 a forked tail
 a frame
 a frame connecting the wheels
@@ -61,25 +49,20 @@ a garden
 a garland
 a generally curvy body shape
 a grassland
-a gray or light brown color
 a greenhouse
 a hair brush
 a handlebar
 a hanger
-a hard, exoskeleton shell
 a headboard
 a heater
 a helmet
 a home
 a hook
-a house
 a hutch
 a job
 a joey
 a keeper
 a knife
-a lamp
-a large body
 a large size
 a large, flat surface
 a large, gray body
@@ -94,19 +77,8 @@ a light purple or white color
 a lioness
 a lock
 a long mane around the head
-a long stem
-a long tail
-a long trunk
-a long, flat surface
-a long, flowing tail
-a long, powerful tail
-a long, slender body
 a long, straight path
-a long, thin body
-a man
 a mane
-a mane of thick, long hair
-a masculine face
 a mate
 a mattress
 a mirror
@@ -114,7 +86,6 @@ a muscular or stocky build
 a nature reserve
 a necklace
 a net
-a pair of pants
 a pair of shoes
 a pair of wings
 a pants
@@ -125,9 +96,7 @@ a person
 a phone
 a pillow
 a plant
-a plate
 a pond
-a porcupine
 a pot
 a pothole
 a pouch on the female's belly
@@ -139,37 +108,26 @@ a red, green, or yellow color
 a reel
 a ring
 a river
-a road
 a roar
 a rod
-a round body
-a round shape
-a rounded body
 a rounded crown of leaves
 a safari
 a saw
 a seat
 a seat affixed to the frame
 a shirt
-a short tail
 a short, stubby tail
 a sidewalk
 a slender body
 a slender or curvaceous figure
-a slender stem
-a slender, tapered shape
-a small body
 a small head
 a small leaf at the top
 a small mouth
 a small, agile body
 a small, delicate flower
 a small, furry body
-a small, hard shell
-a small, round body
 a smaller stature than a man
 a smooth surface
-a soft voice
 a softer voice than a man
 a spiky coat
 a spile
@@ -178,17 +136,13 @@ a stem
 a stop sign
 a street light
 a striped coat
-a sturdy frame
 a sweet fragrance
-a tail
 a tall, rectangular shape
 a tall, slender shape
-a tall, slender trunk
 a tap
 a tawny or yellowish color
 a tire
 a toy
-a toys
 a trainer
 a tree
 a tree stand
@@ -201,58 +155,38 @@ a wreath
 a zoo
 adult
 an Outback
-an apple
 an aquarium
-animal
-aquarium
 aquatic animal
 arthropod
 bait
-black and white coloring
 black spots on the coat
-branches
 breasts
 brightly colored wings
-brown or gray fur
 brown or reddish-brown bark
 bushes
 can live in a confined space
 carnivore
-child
-claws
-clothes
 cone-shaped fruit
 cones
 crustacean
 earrings
 eight legs
 evergreen needles
-female
-fish
-flower
-food
 four legs
-four short legs
 fruit
 furniture
-furry coat
-handlebars
 hangers
 hay
 human
-insect
 intended for sleeping on
 invertebrate
 lagomorph
-large ears
 large eyes
 large fins
 large scales
-large, muscular hind legs
 leaves
 lipstick
 location
-long antennae
 long ears
 long hair
 long, powerful hind legs
@@ -271,54 +205,37 @@ object
 orange fins
 organism
 outdoor
-path
 pedals
 pedals attached to the frame
 person
 pillows
 pine needles
-plant
 plants
 pointed ears
-powerful hind legs
-red or brown color
-red, green, or yellow color
 responsibilities
 rodent
 roots
-round shape
 seaweed
 sharp claws
-sharp teeth and claws
 shoes
-short front legs
 short hair
 short legs
 short, furry legs
-small eyes
 smooth skin
 smooth, gray bark
 storage
-street
 striped fur
 the Serengeti
-the ocean
 three-lobed leaves
 transportation
-tree
 trees
-two eyes on stalks
 two large claws
-two large, pincer-like claws
-two large, wings
 two small eyes on stalks
 two wheels of equal size
-vehicle
 vertebrate
 water
 way
 wears makeup
-wears revealing clothes
 whiskers
 winged seeds
 wooden bark
