@@ -11,6 +11,7 @@ import copy
 
 from glm_saga.elasticnet import IndexedTensorDataset, glm_saga
 from torch.utils.data import DataLoader, TensorDataset
+from torchvision import models
 from collections import OrderedDict
 from normal_train import Trainer
 parser = argparse.ArgumentParser(description='Settings for creating CBM')
@@ -128,6 +129,15 @@ def train_cbm_and_save(args):
                                concept_set = args.concept_set, batch_size = args.batch_size, pretrain=args.pretrain,
                                device = args.device, pool_mode = "avg", save_dir = local_activation_dir,words=concepts)
 
+    
+    # load image data if not using pretrained model
+    if not args.pretrain:
+        preprocess = data_utils.get_resnet_imagenet_preprocess()
+        _, data_train = data_utils.get_data(d_train,args.seed,clip_preprocess=preprocess,target_preprocess=preprocess)
+    
+        _, data_val = data_utils.get_data(d_val,args.seed,clip_preprocess=preprocess,target_preprocess=preprocess)
+        
+
     target_save_name, clip_save_name, text_save_name = utils.get_save_names(args.clip_name, args.backbone, 
                                             args.feature_layer,d_train, args.concept_set, "avg", local_activation_dir)
 
@@ -239,8 +249,17 @@ def train_cbm_and_save(args):
                             break
                     
 
+    # load target model 
+    if not args.pretrain:
+        if args.backbone == "resnet18_places":
+            base_model = models.resnet18(pretrained=args.pretrain, num_classes=365).to(args.device)
+            # remove last projection layer
+            target_model = torch.nn.Sequential(*list(base_model.children())[:-1])
+        parameters = list(target_model.parameters()) + list(proj_layer.parameters())
+    else:
+        parameters = proj_layer.parameters()
 
-    opt = torch.optim.Adam(proj_layer.parameters(), lr=5e-4)
+    opt = torch.optim.Adam(parameters, lr=5e-4)
     
     indices = [ind for ind in range(len(target_features))]
     
@@ -250,7 +269,13 @@ def train_cbm_and_save(args):
     proj_batch_size = min(args.proj_batch_size, len(target_features))
     for i in range(args.proj_steps):
         batch = torch.LongTensor(random.sample(indices, k=proj_batch_size))
-        outs = proj_layer(target_features[batch].to(args.device).detach())
+        if not args.pretrain:
+            images, _ = data_train[batch]
+            images = images.to(torch.float32).to(args.device)
+            features = target_model(images).mean(dim=[2,3]) 
+            outs = proj_layer(features)
+        else:
+            outs = proj_layer(target_features[batch].to(args.device).detach())
         loss = -similarity_fn(clip_features[batch].to(args.device).detach(), outs)
         
         loss = torch.mean(loss)
@@ -258,8 +283,14 @@ def train_cbm_and_save(args):
         opt.step()
         if i%50==0 or i==args.proj_steps-1:
             with torch.no_grad():
-                val_output = proj_layer(val_target_features.to(args.device).detach())
-                val_loss = -similarity_fn(val_clip_features.to(args.device).detach(), val_output)
+                if not args.pretrain:
+                    images, _ = data_val[:100]
+                    images = images.to(torch.float32).to(args.device)
+                    features = target_model(images).mean(dim=[2,3])
+                    val_output = proj_layer(features.detach())
+                else:
+                    val_output = proj_layer(val_target_features.to(args.device).detach())
+                val_loss = -similarity_fn(val_clip_features.to(args.device).detach()[:100], val_output)
                 val_loss = torch.mean(val_loss)
             if i==0:
                 best_val_loss = val_loss

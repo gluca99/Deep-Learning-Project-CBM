@@ -36,6 +36,7 @@ def save_target_activations(target_model, dataset, save_name, target_layers = ["
                 features = target_model(images.to(torch.float32).to(device))
             else:
                 features = target_model(images.to(device))
+    
     for target_layer in target_layers:
         torch.save(torch.cat(all_features[target_layer]), save_names[target_layer])
     #free memory
@@ -115,7 +116,7 @@ def save_activations(clip_name, target_name, target_layers, d_probe,seed,train1,
     else:
         save_target_activations(target_model, data_t, target_save_name, target_layers,
                                 batch_size, device, pool_mode)
-    
+
     return
     
     
