@@ -89,12 +89,11 @@ def train_cbm_and_save(args):
         os.makedirs(args.save_dir)
     if args.concept_set==None:
         args.concept_set = "data/concept_sets/{}_gpt3_ensemble2.txt".format(args.dataset)
-    import pdb
     similarity_fn = similarity.cos_similarity_cubed_single
     
     d_train = args.dataset + "_train"
     d_val = args.dataset + "_val"
-    print("a",flush=True)
+    
     #get concept set
     #cls_file="./sandbox-lf-cbm/data/%s_classes.txt" % (args.dataset)
     #cls_file = data_utils.LABEL_FILES[args.dataset]
@@ -104,10 +103,13 @@ def train_cbm_and_save(args):
     
     with open(args.concept_set) as f:
         concepts = f.read().split("\n")
-    print(f"Length of concepts {len(concepts)}")
+
     seg=args.dataset.split("_")
     #CBM Continual
     task=int(seg[2])
+
+    print(f"Number of raw concepts for task {task}: {len(concepts)}")
+
     if args.kill_dup=="True":
         concepts=remove_duplicates(concepts)
         if task>0:
@@ -118,7 +120,6 @@ def train_cbm_and_save(args):
                 inter_concept_pre=f.read().split("\n")
             concepts=rearrange_list(concepts,inter_concept_pre)
 
-    print("b",flush=True)
     local_activation_dir=args.save_dir+"/"+args.activation_dir
     #save activations and get save_paths
     for d_probe in [d_train, d_val]:
@@ -127,15 +128,15 @@ def train_cbm_and_save(args):
                                concept_set = args.concept_set, batch_size = args.batch_size, pretrain=args.pretrain,
                                device = args.device, pool_mode = "avg", save_dir = local_activation_dir,words=concepts)
 
-    print("c",flush=True)
     target_save_name, clip_save_name, text_save_name = utils.get_save_names(args.clip_name, args.backbone, 
                                             args.feature_layer,d_train, args.concept_set, "avg", local_activation_dir)
+
     val_target_save_name, val_clip_save_name, text_save_name =  utils.get_save_names(args.clip_name, args.backbone,
                                             args.feature_layer, d_val, args.concept_set, "avg", local_activation_dir)
-    print("d",flush=True)
-    print(f"target_save_name: {target_save_name}")
+
     #load features
     with torch.no_grad():
+        # only load target features from frozen backbone if running with pretrained model
         target_features = torch.load(target_save_name, map_location="cpu").float()
         val_target_features = torch.load(val_target_save_name, map_location="cpu").float()
 
@@ -162,6 +163,8 @@ def train_cbm_and_save(args):
                 print("Deleting {}, CLIP top5:{:.3f}".format(concept, highest[i]))
     concepts = [concepts[i] for i in range(len(concepts)) if highest[i]>args.clip_cutoff]
     
+    print(f"Number of concepts for task {task} after CLIP top 5: {len(concepts)}")
+
     #save memory by recalculating
     del clip_features
     with torch.no_grad():
@@ -284,19 +287,24 @@ def train_cbm_and_save(args):
     else:
         proj_layer=best_weights
     print("Best step:{}, Avg val similarity:{:.4f}".format(best_step, -best_val_loss.cpu()))
-    
-    #delete concepts that are not interpretable
-    with torch.no_grad():
-        outs = proj_layer(val_target_features.to(args.device).detach())
-        sim = similarity_fn(val_clip_features.to(args.device).detach(), outs)
-        interpretable = sim > args.interpretability_cutoff
         
-    if args.print:
-        for i, concept in enumerate(concepts):
-            if sim[i]<=args.interpretability_cutoff:
-                print("Deleting {}, Iterpretability:{:.3f}".format(concept, sim[i]))
-    
-    concepts = [concepts[i] for i in range(len(concepts)) if interpretable[i]]
+    #delete concepts that are not interpretable (only with if pretrained model)
+    if args.pretrain:
+        with torch.no_grad():
+            outs = proj_layer(val_target_features.to(args.device).detach())
+            sim = similarity_fn(val_clip_features.to(args.device).detach(), outs)
+            interpretable = sim > args.interpretability_cutoff
+            
+        if args.print:
+            for i, concept in enumerate(concepts):
+                if sim[i]<=args.interpretability_cutoff:
+                    print("Deleting {}, Iterpretability:{:.3f}".format(concept, sim[i]))
+        
+        concepts = [concepts[i] for i in range(len(concepts)) if interpretable[i]]
+    else:
+        # if not using pretrained model target features are random and can not be used to 
+        # verify if concepts are interpretable. instead make all concepts interpretable
+        interpretable = torch.ones(len(concepts), dtype=torch.bool)
 
     del clip_features, val_clip_features
     if (args.nonlinear=='False'):
@@ -358,8 +366,8 @@ def train_cbm_and_save(args):
         proj_layer.cbl.weight=W_c.cbl.weight
         
     
-    train_targets = data_utils.get_targets_only(d_train,args.seed)[:1000]
-    val_targets = data_utils.get_targets_only(d_val,args.seed)[:1000]
+    train_targets = data_utils.get_targets_only(d_train,args.seed)
+    val_targets = data_utils.get_targets_only(d_val,args.seed)
     
     with torch.no_grad():
         train_c = proj_layer(target_features.detach())

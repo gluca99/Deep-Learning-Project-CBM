@@ -38,7 +38,10 @@ def eval(val_data_t,model):
     total = 0
     for images, labels in tqdm(DataLoader(val_data_t, 50, num_workers=2, pin_memory=True)):
         with torch.no_grad():
-            outs, _ = model(images.to(device))
+            if images.dtype != torch.float32:
+                outs, _ = model(images.to(torch.float32).to(device))
+            else:    
+                outs, _ = model(images.to(device))
             pred = torch.argmax(outs, dim=1)
             correct += torch.sum(pred.cpu()==labels)
             total += len(labels)

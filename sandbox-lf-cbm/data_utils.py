@@ -156,17 +156,16 @@ def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None):
             clip_data=[item[0] for item in clip_scenario.test_stream[task].dataset]
             target_data=[item[0] for item in target_scenario.test_stream[task].dataset]
         
-        clip_data = clip_data[:1000]
-        target_data = target_data[:1000]
-        label = label[:1000]
-        clip_tensor=torch.stack(clip_data,dim=0)
-        print("label #f")
-        target_tensor=torch.stack(target_data,dim=0)
-        print("label #g")
-        data_c=torch.utils.data.TensorDataset(clip_tensor,label)
-        print("label #h")
-        data_t=torch.utils.data.TensorDataset(target_tensor,label)
-        print("label #i")
+        del clip_scenario, target_scenario
+        # turn to float16 precision
+        clip_data = [clip_data[i].to(torch.float16) for i in range(len(clip_data))]
+        target_data = [target_data[i].to(torch.float16) for i in range(len(target_data))]
+        
+        clip_data=torch.stack(clip_data,dim=0)
+        target_data=torch.stack(target_data,dim=0)
+        
+        data_c=torch.utils.data.TensorDataset(clip_data,label)
+        data_t=torch.utils.data.TensorDataset(target_data,label)
         
     else:
         if dataset_name == "cifar100_train":
@@ -288,7 +287,7 @@ def get_targets_only(dataset_name,seed):
     else:
         return pil_data.targets
 
-def get_target_model(target_name,d_probe,seed,train1,pretrain,device):
+def get_target_model(target_name,d_probe,seed,train1,device,pretrain=False):
     if target_name.startswith("clip_"):
         target_name = target_name[5:]
         model, preprocess = clip.load(target_name, device=device)
