@@ -92,7 +92,7 @@ def get_resnet_imagenet_preprocess():
     return preprocess
 
 
-def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None):
+def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None, batch=None):
     print("get_data:",dataset_name)
     seg=dataset_name.split("_")
     if seg[1]=="task":
@@ -160,7 +160,7 @@ def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None):
         # turn to float16 precision
         clip_data = [clip_data[i].to(torch.float16) for i in range(len(clip_data))]
         target_data = [target_data[i].to(torch.float16) for i in range(len(target_data))]
-        
+
         clip_data=torch.stack(clip_data,dim=0)
         target_data=torch.stack(target_data,dim=0)
         
@@ -311,7 +311,7 @@ def get_target_model(target_name,d_probe,seed,train1,device,pretrain=False):
     
     elif target_name == 'resnet18_places': 
         if train1=='False':
-            target_model = models.resnet18(pretrained=pretrain, num_classes=365).to(device)
+            target_model = models.resnet18(pretrained=False, num_classes=365).to(device)
             if pretrain:
                 state_dict = torch.load('./sandbox-lf-cbm/data/resnet18_places365.pth.tar')['state_dict']
                 new_state_dict = {}

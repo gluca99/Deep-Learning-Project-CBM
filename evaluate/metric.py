@@ -63,7 +63,7 @@ def plotData(allData, legend,task_num):
             forget+=float(t[0])-float(t[-1])
             learn+=float(t[0])
         average_acc/=len(pdlist)
-        forget/=len(pdlist-1)
+        forget/=len(pdlist)-1
         learn/=len(pdlist)
         print("average accuracy: ",average_acc, "learning accuracy:",learn, "average forgetting:", forget)
 
@@ -76,7 +76,8 @@ def main():
     allData = []
 
     accuracy_task = list()
-    file_name=args.file_dir+args.strategy+'_acc.txt'
+    #file_name=args.file_dir+args.strategy+'_acc.txt'
+    file_name=args.file_dir + '/acc2.txt'
     with open(file_name, 'r') as j:
         contents = json.loads(j.read())
     for i in range(task_num):

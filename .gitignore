@@ -1,3 +1,4 @@
 download_data/
 __pycache__/
 cache/
+sandbox-lf-cbm/data/resnet18_places365.pth.tar

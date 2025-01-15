@@ -101,7 +101,8 @@ def train_cbm_and_save(args):
     # print("Classes:",cls_file)
     # with open(cls_file, "r") as f:
     #     classes = f.read().split("\n")
-    
+        
+    # load new concepts
     with open(args.concept_set) as f:
         concepts = f.read().split("\n")
 
@@ -110,6 +111,18 @@ def train_cbm_and_save(args):
     task=int(seg[2])
 
     print(f"Number of raw concepts for task {task}: {len(concepts)}")
+
+    # load concept set from previous dataset
+    previous_dataset=args.dataset.replace("task_%d"%(task),"task_%d"%(task-1))
+    inter_concept_path="{}/{}_cbm/concepts.txt".format(args.save_dir,previous_dataset)
+    with open(inter_concept_path) as f:
+        inter_concept_pre=f.read().split("\n")
+    
+    num_previous_concepts = len(inter_concept_pre)
+
+    #concepts = inter_concept_pre + concepts
+
+    print(f"Number of total concepts for task {task}: {len(concepts)}")
 
     if args.kill_dup=="True":
         concepts=remove_duplicates(concepts)
@@ -136,8 +149,7 @@ def train_cbm_and_save(args):
         _, data_train = data_utils.get_data(d_train,args.seed,clip_preprocess=preprocess,target_preprocess=preprocess)
     
         _, data_val = data_utils.get_data(d_val,args.seed,clip_preprocess=preprocess,target_preprocess=preprocess)
-        
-
+    
     target_save_name, clip_save_name, text_save_name = utils.get_save_names(args.clip_name, args.backbone, 
                                             args.feature_layer,d_train, args.concept_set, "avg", local_activation_dir)
 
@@ -164,7 +176,6 @@ def train_cbm_and_save(args):
 
         del image_features, text_features, val_image_features
     
-    #filter concepts not activating highly
     highest = torch.mean(torch.topk(clip_features, dim=0, k=5)[0], dim=0)
     
     if args.print:
@@ -189,6 +200,18 @@ def train_cbm_and_save(args):
     
     val_clip_features = val_clip_features[:, highest>args.clip_cutoff]
     
+    # load backbone model
+    if not args.pretrain:
+        if args.backbone == "resnet18_places":
+            base_model = models.resnet18(pretrained=False, num_classes=365).to(args.device)
+            # remove last projection layer
+            backbone_model = torch.nn.Sequential(*list(base_model.children())[:-1])
+        
+        if task>0:
+            previous_dataset=args.dataset.replace("task_%d"%(task),"task_%d"%(task-1))
+            backbone_path="{}/{}_cbm/backbone.pth".format(args.save_dir,previous_dataset)
+            backbone_model.load_state_dict(torch.load(backbone_path))
+
     #learn projection layer
     if (args.nonlinear=='False'):
         proj_layer = torch.nn.Linear(in_features=target_features.shape[1], out_features=len(concepts),
@@ -249,13 +272,9 @@ def train_cbm_and_save(args):
                             break
                     
 
-    # load target model 
+    # define parameters
     if not args.pretrain:
-        if args.backbone == "resnet18_places":
-            base_model = models.resnet18(pretrained=args.pretrain, num_classes=365).to(args.device)
-            # remove last projection layer
-            target_model = torch.nn.Sequential(*list(base_model.children())[:-1])
-        parameters = list(target_model.parameters()) + list(proj_layer.parameters())
+        parameters = list(backbone_model.parameters()) + list(proj_layer.parameters())
     else:
         parameters = proj_layer.parameters()
 
@@ -267,31 +286,86 @@ def train_cbm_and_save(args):
     best_step = 0
     best_weights = None
     proj_batch_size = min(args.proj_batch_size, len(target_features))
+
+    # use SGD instead of full batched gradient descent if not using batched model
+    if not args.pretrain:
+        index_train_dataset = TensorDataset(torch.arange(len(data_train)), torch.zeros(len(data_train)))
+        index_train_dataloader = DataLoader(index_train_dataset, batch_size=proj_batch_size, shuffle=True)
+
+        index_val_dataset = TensorDataset(torch.arange(len(data_val)), torch.zeros(len(data_val)))
+        index_val_dataloader = DataLoader(index_val_dataset, batch_size=16, shuffle=False)
+    
     for i in range(args.proj_steps):
-        batch = torch.LongTensor(random.sample(indices, k=proj_batch_size))
+        if i % 50 == 0:
+            print(f"Epoch: {i}")
         if not args.pretrain:
-            images, _ = data_train[batch]
-            images = images.to(torch.float32).to(args.device)
-            features = target_model(images).mean(dim=[2,3]) 
-            outs = proj_layer(features)
+            backbone_model.train()
+
+            for batch_idx, _ in index_train_dataloader:
+                # load images
+                images, _ = data_train[batch_idx]
+
+                # ensure right floating point precision
+                images = images.to(torch.float32).to(args.device)
+
+                # obtain features py passing through backbone model
+                features = backbone_model(images).mean(dim=[2,3]) 
+                
+                # get output
+                outs = proj_layer(features)
+
+                # get targets
+                targets = clip_features[batch_idx].to(args.device).detach()
+
+                # compute loss
+                loss = -similarity_fn(targets, outs)
+                loss = torch.mean(loss)
+
+                opt.zero_grad()
+                loss.backward()
+                opt.step()
         else:
+            # with pretrained model run full batched gradient descent
+            batch = torch.LongTensor(random.sample(indices, k=proj_batch_size))
             outs = proj_layer(target_features[batch].to(args.device).detach())
-        loss = -similarity_fn(clip_features[batch].to(args.device).detach(), outs)
+
+            loss = -similarity_fn(clip_features[batch].to(args.device).detach(), outs)
+            loss = torch.mean(loss)
+
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
         
-        loss = torch.mean(loss)
-        loss.backward()
-        opt.step()
         if i%50==0 or i==args.proj_steps-1:
             with torch.no_grad():
                 if not args.pretrain:
-                    images, _ = data_val[:100]
-                    images = images.to(torch.float32).to(args.device)
-                    features = target_model(images).mean(dim=[2,3])
-                    val_output = proj_layer(features.detach())
+                    backbone_model.eval()
+                    val_loss = 0.0
+                    for batch_idx, _ in index_val_dataloader:
+                        # load images from batch
+                        images, _ = data_val[batch_idx]
+
+                        # ensure correct floating point precision
+                        images = images.to(torch.float32).to(args.device)
+
+                        # obtain features from backbone
+                        features = backbone_model(images).mean(dim=[2,3])
+
+                        # get out
+                        outs = proj_layer(features.detach())
+
+                        # get targets
+                        targets = val_clip_features[batch_idx].to(args.device).detach()
+
+                        # compute loss
+                        loss = -similarity_fn(targets, outs)
+                        
+                        val_loss += torch.mean(loss).item()
+                    val_loss /= len(index_val_dataloader)
                 else:
                     val_output = proj_layer(val_target_features.to(args.device).detach())
-                val_loss = -similarity_fn(val_clip_features.to(args.device).detach()[:100], val_output)
-                val_loss = torch.mean(val_loss)
+                    val_loss = -similarity_fn(val_clip_features.to(args.device).detach(), val_output)
+                    val_loss = torch.mean(val_loss)
             if i==0:
                 best_val_loss = val_loss
                 best_step = i
@@ -311,7 +385,7 @@ def train_cbm_and_save(args):
                     best_weights=copy.deepcopy(proj_layer)
             else: #stop if val loss starts increasing
                 break
-        opt.zero_grad()
+        
     
     if (args.nonlinear=='False'):
         proj_layer.load_state_dict({"weight":best_weights})
@@ -497,6 +571,8 @@ def train_cbm_and_save(args):
     torch.save(W_c, os.path.join(save_name ,"W_c.pt"))
     torch.save(W_g, os.path.join(save_name, "W_g.pt"))
     torch.save(b_g, os.path.join(save_name, "b_g.pt"))
+    if not args.pretrain:
+        torch.save(backbone_model.state_dict(), os.path.join(save_name ,"backbone.pth"))
     
     with open(os.path.join(save_name, "concepts.txt"), 'w') as f:
         f.write(concepts[0])
