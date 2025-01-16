@@ -49,12 +49,12 @@ def eval(val_data_t,model):
 if __name__=='__main__':
     args = parser.parse_args()
     result_list={}
-    for d in range(2): # args.task_num):
+    for d in range(args.task_num):
         result_list[d]=[]
         load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.seed)
         print("load data:",load_dir)
         val_data,dataset,train1=get_dataset(load_dir,args.seed)
-        for m in range(d,2): # args.task_num):
+        for m in range(d,args.task_num):
             model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.seed)
             print("load model:",model_dir)
             model=get_model(model_dir,dataset,args.seed,train1,args.nonlinear,pretrain=args.pretrain)

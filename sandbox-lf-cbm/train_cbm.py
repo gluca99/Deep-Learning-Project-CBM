@@ -8,6 +8,7 @@ import argparse
 import datetime
 import json
 import copy
+from tqdm import tqdm
 
 from glm_saga.elasticnet import IndexedTensorDataset, glm_saga
 from torch.utils.data import DataLoader, TensorDataset
@@ -50,6 +51,7 @@ parser.add_argument("--lr", type=float, default=0.0005,help='learning rate to tr
 parser.add_argument("--n_iters", type=int, default=1000, help="How many iterations to run the final layer solver for")
 parser.add_argument("--print", action='store_true', help="Print all concepts being deleted in this stage")
 parser.add_argument("--kill_dup", type=str, default="False")
+parser.add_argument("--val_log_interval", type=int, default=50, help="Frequency to check early stopping for")
 
 def remove_duplicates(input_list):
     # Initialize an empty set to keep track of seen elements
@@ -113,16 +115,19 @@ def train_cbm_and_save(args):
     print(f"Number of raw concepts for task {task}: {len(concepts)}")
 
     # load concept set from previous dataset
-    previous_dataset=args.dataset.replace("task_%d"%(task),"task_%d"%(task-1))
-    inter_concept_path="{}/{}_cbm/concepts.txt".format(args.save_dir,previous_dataset)
-    with open(inter_concept_path) as f:
-        inter_concept_pre=f.read().split("\n")
+    num_previous_concepts = 0
+    if task>0:
+        previous_dataset=args.dataset.replace("task_%d"%(task),"task_%d"%(task-1))
+        inter_concept_path="{}/{}_cbm/concepts.txt".format(args.save_dir,previous_dataset)
+        with open(inter_concept_path) as f:
+            inter_concept_pre=f.read().split("\n")
+        num_previous_concepts = len(inter_concept_pre)
     
-    num_previous_concepts = len(inter_concept_pre)
+        # add previous concepts to concept set
+        concepts = inter_concept_pre + concepts
 
-    #concepts = inter_concept_pre + concepts
-
-    print(f"Number of total concepts for task {task}: {len(concepts)}")
+    total_concepts = len(concepts)
+    print(f"Number of total concepts for task {task}: {total_concepts}")
 
     if args.kill_dup=="True":
         concepts=remove_duplicates(concepts)
@@ -182,7 +187,10 @@ def train_cbm_and_save(args):
         for i, concept in enumerate(concepts):
             if highest[i]<=args.clip_cutoff:
                 print("Deleting {}, CLIP top5:{:.3f}".format(concept, highest[i]))
-    concepts = [concepts[i] for i in range(len(concepts)) if highest[i]>args.clip_cutoff]
+
+    # only filter based on CLIP criteria if it is a new concept
+    clip_mask = (highest>args.clip_cutoff) | (torch.arange(total_concepts) < num_previous_concepts)
+    concepts = [concepts[i] for i in range(len(concepts)) if (highest[i]>args.clip_cutoff or i < num_previous_concepts)]
     
     print(f"Number of concepts for task {task} after CLIP top 5: {len(concepts)}")
 
@@ -192,13 +200,13 @@ def train_cbm_and_save(args):
         image_features = torch.load(clip_save_name, map_location="cpu").float()
         image_features /= torch.norm(image_features, dim=1, keepdim=True)
 
-        text_features = torch.load(text_save_name, map_location="cpu").float()[highest>args.clip_cutoff]
+        text_features = torch.load(text_save_name, map_location="cpu").float()[clip_mask]
         text_features /= torch.norm(text_features, dim=1, keepdim=True)
     
         clip_features = image_features @ text_features.T
         del image_features, text_features
     
-    val_clip_features = val_clip_features[:, highest>args.clip_cutoff]
+    val_clip_features = val_clip_features[:, clip_mask]
     
     # load backbone model
     if not args.pretrain:
@@ -255,7 +263,11 @@ def train_cbm_and_save(args):
                                 if (args.nonlinear=='False'):
                                     proj_layer.weight[i,:]=W_c_pre[j,:]
                                 else:
-                                    proj_layer.cbl.weight[i,:]=W_c_pre.cbl.weight[j,:]
+                                    try:
+                                        proj_layer.cbl.weight[i,:]=W_c_pre.cbl.weight[j,:]
+                                    except:
+                                        import pdb
+                                        pdb.set_trace()
                                 break
                             else:
                                 seen-=1
@@ -296,12 +308,10 @@ def train_cbm_and_save(args):
         index_val_dataloader = DataLoader(index_val_dataset, batch_size=16, shuffle=False)
     
     for i in range(args.proj_steps):
-        if i % 50 == 0:
-            print(f"Epoch: {i}")
         if not args.pretrain:
             backbone_model.train()
 
-            for batch_idx, _ in index_train_dataloader:
+            for batch_idx, _ in tqdm(index_train_dataloader, desc=f"Epoch {i}/{args.proj_steps}"):
                 # load images
                 images, _ = data_train[batch_idx]
 
@@ -336,7 +346,7 @@ def train_cbm_and_save(args):
             loss.backward()
             opt.step()
         
-        if i%50==0 or i==args.proj_steps-1:
+        if i%args.val_log_interval==0 or i==args.proj_steps-1:
             with torch.no_grad():
                 if not args.pretrain:
                     backbone_model.eval()
@@ -358,9 +368,7 @@ def train_cbm_and_save(args):
                         targets = val_clip_features[batch_idx].to(args.device).detach()
 
                         # compute loss
-                        loss = -similarity_fn(targets, outs)
-                        
-                        val_loss += torch.mean(loss).item()
+                        val_loss += torch.mean(-similarity_fn(targets, outs))
                     val_loss /= len(index_val_dataloader)
                 else:
                     val_output = proj_layer(val_target_features.to(args.device).detach())
@@ -372,10 +380,7 @@ def train_cbm_and_save(args):
                 if (args.nonlinear=='False'):
                     best_weights = proj_layer.weight.clone()
                 else:
-                    best_weights=copy.deepcopy(proj_layer)
-                print("Step:{}, Avg train similarity:{:.4f}, Avg val similarity:{:.4f}".format(best_step, -loss.cpu(),
-                                                                                               -best_val_loss.cpu()))
-                
+                    best_weights=copy.deepcopy(proj_layer)                
             elif val_loss < best_val_loss:
                 best_val_loss = val_loss
                 best_step = i
@@ -385,8 +390,8 @@ def train_cbm_and_save(args):
                     best_weights=copy.deepcopy(proj_layer)
             else: #stop if val loss starts increasing
                 break
-        
-    
+            print("Step:{}, Avg train similarity:{:.4f}, Avg val similarity:{:.4f}".format(best_step, -loss.cpu(),
+                                                                                               -best_val_loss.cpu()))
     if (args.nonlinear=='False'):
         proj_layer.load_state_dict({"weight":best_weights})
     else:
@@ -398,14 +403,16 @@ def train_cbm_and_save(args):
         with torch.no_grad():
             outs = proj_layer(val_target_features.to(args.device).detach())
             sim = similarity_fn(val_clip_features.to(args.device).detach(), outs)
-            interpretable = sim > args.interpretability_cutoff
+            # only filter out new concepts
+            interpretable = (sim > args.interpretability_cutoff) | (torch.arange(len(sim)).to(args.device) < num_previous_concepts)
             
         if args.print:
             for i, concept in enumerate(concepts):
-                if sim[i]<=args.interpretability_cutoff:
+                if sim[i]<=args.interpretability_cutoff and i >= num_previous_concepts:
                     print("Deleting {}, Iterpretability:{:.3f}".format(concept, sim[i]))
         
         concepts = [concepts[i] for i in range(len(concepts)) if interpretable[i]]
+        print(f"Number of concepts for task {task} after interpretability tools: {len(concepts)}")
     else:
         # if not using pretrained model target features are random and can not be used to 
         # verify if concepts are interpretable. instead make all concepts interpretable

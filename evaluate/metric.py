@@ -77,7 +77,7 @@ def main():
 
     accuracy_task = list()
     #file_name=args.file_dir+args.strategy+'_acc.txt'
-    file_name=args.file_dir + '/acc2.txt'
+    file_name=args.file_dir + '/acc.txt'
     with open(file_name, 'r') as j:
         contents = json.loads(j.read())
     for i in range(task_num):
