@@ -1,0 +1,20 @@
+flatfish
+seal
+dolphin
+bee
+oak tree
+palm tree
+sweet pepper
+sea
+leopard
+raccoon
+bear
+skunk
+tractor
+streetcar
+chair
+table
+television
+clock
+boy
+keyboard

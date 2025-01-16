@@ -1,0 +1,20 @@
+bicycle
+bus
+motorcycle
+pickup truck
+train
+lawn mower
+rocket
+streetcar
+tank
+tractor
+bed
+chair
+couch
+table
+wardrobe
+bridge
+castle
+house
+road
+skyscraper

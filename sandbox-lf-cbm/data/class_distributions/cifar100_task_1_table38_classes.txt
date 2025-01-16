@@ -1,0 +1,20 @@
+maple tree
+oak tree
+palm tree
+pine tree
+willow tree
+orchid
+poppy
+rose
+sunflower
+tulip
+apple
+mushroom
+orange
+pear
+sweet pepper
+cloud
+forest
+mountain
+plain
+sea
