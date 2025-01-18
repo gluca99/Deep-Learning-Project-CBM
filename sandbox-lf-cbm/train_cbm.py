@@ -30,6 +30,7 @@ parser.add_argument("--normalize_wf_method",type=str,default="all")
 parser.add_argument("--backbone", type=str, default="resnet18_places", help="Which pretrained model to use as backbone")
 parser.add_argument("--clip_name", type=str, default="ViT-B/16", help="Which CLIP model to use")
 parser.add_argument("--pretrain", action='store_true', help="flag to use pretrained backbone")
+parser.add_argument("--interpretable", action='store_true', help="flag to use interpretability filter after projection training")
 
 parser.add_argument("--device", type=str, default="cuda", help="Which device to use")
 parser.add_argument("--batch_size", type=int, default=512, help="Batch size used when saving model/CLIP activations")
@@ -82,6 +83,24 @@ def rearrange_list(A, B):
 
     return result
 
+# Function to get features
+def get_features(data_loader, model, device):
+    all_features = []
+    model.eval()
+
+    with torch.no_grad():  # No gradients needed for inference
+        for images, _ in data_loader:
+            images = images.to(torch.float32).to(device)
+
+            # obtain features py passing through backbone model
+            features = model(images).mean(dim=[2,3]) 
+
+            # appemd
+            all_features.append(features)
+
+    # Concatenate all features into a single tensor
+    return torch.cat(all_features, dim=0)
+
 def train_cbm_and_save(args):
     args_dict_tmp = vars(args)
     args_dict = copy.deepcopy(args_dict_tmp)
@@ -97,12 +116,7 @@ def train_cbm_and_save(args):
     d_train = args.dataset + "_train"
     d_val = args.dataset + "_val"
     
-    #get concept set
-    #cls_file="./sandbox-lf-cbm/data/%s_classes.txt" % (args.dataset)
-    #cls_file = data_utils.LABEL_FILES[args.dataset]
-    # print("Classes:",cls_file)
-    # with open(cls_file, "r") as f:
-    #     classes = f.read().split("\n")
+    
         
     # load new concepts
     with open(args.concept_set) as f:
@@ -111,6 +125,32 @@ def train_cbm_and_save(args):
     seg=args.dataset.split("_")
     #CBM Continual
     task=int(seg[2])
+
+    # load class distribution
+    if "fix" in args.seed:
+        cls_file="./sandbox-lf-cbm/data/%s_classes.txt" % (seg[0])
+        print("Classes:",cls_file)
+        with open(cls_file, "r") as f:
+            classes = f.read().split("\n")
+        class_id = {name: i for i, name in enumerate(classes)}
+        
+        order_list = []
+        num_tasks = int(seg[3])
+        for t in range(num_tasks):
+            task_class_file = "./sandbox-lf-cbm/data/class_distributions/%s_task_%s_%s_classes.txt" % (seg[0], t, seg[-1])
+            with open(task_class_file, "r") as f:
+                class_list = f.read().split("\n")
+            try:
+                order_list.extend([class_id[c] for c in class_list])
+            except:
+                raise Exception("Ensure that your class files have no trailing spaces in the end")    
+
+        # save to file
+        order_file='./cache/%s_order_%s.txt'%(seg[0],seg[-1])
+        if not os.path.exists(order_file):
+            with open(order_file, "w") as file:
+                for item in order_list:
+                    file.write(str(item) + "\n")
 
     print(f"Number of raw concepts for task {task}: {len(concepts)}")
 
@@ -305,7 +345,7 @@ def train_cbm_and_save(args):
         index_train_dataloader = DataLoader(index_train_dataset, batch_size=proj_batch_size, shuffle=True)
 
         index_val_dataset = TensorDataset(torch.arange(len(data_val)), torch.zeros(len(data_val)))
-        index_val_dataloader = DataLoader(index_val_dataset, batch_size=16, shuffle=False)
+        index_val_dataloader = DataLoader(index_val_dataset, batch_size=32, shuffle=False)
     
     for i in range(args.proj_steps):
         if not args.pretrain:
@@ -399,7 +439,7 @@ def train_cbm_and_save(args):
     print("Best step:{}, Avg val similarity:{:.4f}".format(best_step, -best_val_loss.cpu()))
         
     #delete concepts that are not interpretable (only with if pretrained model)
-    if args.pretrain:
+    if args.pretrain or args.interpretable:
         with torch.no_grad():
             outs = proj_layer(val_target_features.to(args.device).detach())
             sim = similarity_fn(val_clip_features.to(args.device).detach(), outs)
@@ -413,6 +453,8 @@ def train_cbm_and_save(args):
         
         concepts = [concepts[i] for i in range(len(concepts)) if interpretable[i]]
         print(f"Number of concepts for task {task} after interpretability tools: {len(concepts)}")
+        if len(concepts) == num_previous_concepts:
+            raise Exception(f"All concepts for task {task} has been filtered out.")
     else:
         # if not using pretrained model target features are random and can not be used to 
         # verify if concepts are interpretable. instead make all concepts interpretable
@@ -480,10 +522,22 @@ def train_cbm_and_save(args):
     
     train_targets = data_utils.get_targets_only(d_train,args.seed)
     val_targets = data_utils.get_targets_only(d_val,args.seed)
-    
+
     with torch.no_grad():
-        train_c = proj_layer(target_features.detach())
-        val_c = proj_layer(val_target_features.detach())
+        if args.pretrain:
+            train_c = proj_layer(target_features.detach())
+            val_c = proj_layer(val_target_features.detach())
+        else:
+            # Create dataloaders
+            train_loader = DataLoader(data_train, batch_size=128, shuffle=False)
+            val_loader = DataLoader(data_val, batch_size=128, shuffle=False)
+            
+            # Get features for train and validation sets
+            train_features = get_features(train_loader, backbone_model, args.device).to("cpu")
+            val_features = get_features(val_loader, backbone_model, args.device).to("cpu")
+
+            train_c = proj_layer(train_features.detach())
+            val_c = proj_layer(val_features.detach())
         
         train_mean = torch.mean(train_c, dim=0, keepdim=True)
         train_std = torch.std(train_c, dim=0, keepdim=True)

@@ -133,10 +133,10 @@ def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None, ba
 
         else:
             order_list=[]
-            if seed=='fix':
-                order_file=CACHE+'%s_order.txt'%(seg[0])
-            else:
-                order_file=CACHE+'%s_order_%s.txt'%(seg[0],seed)
+            # if seed=='fix':
+            #     order_file=CACHE+'%s_order.txt'%(seg[0])
+            # else:
+            order_file=CACHE+'%s_order_%s.txt'%(seg[0],seg[4])
             with open(order_file, 'r') as file:
                 for line in file:
                     order_list.append(int(line))
@@ -233,10 +233,10 @@ def get_pil_data(dataset_name,seed):
                 scenario = nc_benchmark(train, test, n_experiences=int(seg[3]), task_labels=False)
         else:
             order_list=[]
-            if seed=='fix':
-                order_file=CACHE+'%s_order.txt'%(seg[0])
-            else:
-                order_file=CACHE+'%s_order_%s.txt'%(seg[0],seed)
+            # if seed=='fix':
+            #     order_file=CACHE+'%s_order.txt'%(seg[0])
+            # else:
+            order_file=CACHE+'%s_order_%s.txt'%(seg[0],seg[4])
             with open(order_file, 'r') as file:
                 for line in file:
                     order_list.append(int(line))

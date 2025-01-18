@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(description='Settings for creating CBM')
 
 parser.add_argument("--dataset", type=str, default="cifar100")
 parser.add_argument("--seed", type=str, default="3456")
+parser.add_argument("--task_name", type=str, default="3456")
 parser.add_argument("--save_dir", type=str, default="save_dir")
 parser.add_argument("--task_num", type=int, default=10)
 parser.add_argument("--nonlinear", type=str, default="False")
@@ -51,11 +52,17 @@ if __name__=='__main__':
     result_list={}
     for d in range(args.task_num):
         result_list[d]=[]
-        load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.seed)
+        if "fix" not in args.seed:
+            load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.seed)
+        else:
+            load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.task_name)
         print("load data:",load_dir)
         val_data,dataset,train1=get_dataset(load_dir,args.seed)
         for m in range(d,args.task_num):
-            model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.seed)
+            if "fix" not in args.seed:
+                model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.seed)
+            else:
+                model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.task_name)
             print("load model:",model_dir)
             model=get_model(model_dir,dataset,args.seed,train1,args.nonlinear,pretrain=args.pretrain)
             acc=eval(val_data,model)
