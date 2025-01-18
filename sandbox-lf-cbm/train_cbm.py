@@ -148,6 +148,7 @@ def train_cbm_and_save(args):
         # save to file
         order_file='./cache/%s_order_%s.txt'%(seg[0],seg[-1])
         if not os.path.exists(order_file):
+            os.makedirs("./cache", exist_ox=False)
             with open(order_file, "w") as file:
                 for item in order_list:
                     file.write(str(item) + "\n")
