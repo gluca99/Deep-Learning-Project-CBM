@@ -439,6 +439,18 @@ def train_cbm_and_save(args):
         proj_layer=best_weights
     print("Best step:{}, Avg val similarity:{:.4f}".format(best_step, -best_val_loss.cpu()))
         
+
+    # get features from trained backbone
+    if not args.pretrain:
+        with torch.no_grad():
+            # Create dataloaders
+            train_loader = DataLoader(data_train, batch_size=128, shuffle=False)
+            val_loader = DataLoader(data_val, batch_size=128, shuffle=False)
+            
+            # Get features for train and validation sets
+            target_features = get_features(train_loader, backbone_model, args.device).to("cpu")
+            val_target_features = get_features(val_loader, backbone_model, args.device).to("cpu")
+    
     #delete concepts that are not interpretable (only with if pretrained model)
     if args.pretrain or args.interpretable:
         with torch.no_grad():
@@ -525,21 +537,9 @@ def train_cbm_and_save(args):
     val_targets = data_utils.get_targets_only(d_val,args.seed)
 
     with torch.no_grad():
-        if args.pretrain:
-            train_c = proj_layer(target_features.detach())
-            val_c = proj_layer(val_target_features.detach())
-        else:
-            # Create dataloaders
-            train_loader = DataLoader(data_train, batch_size=128, shuffle=False)
-            val_loader = DataLoader(data_val, batch_size=128, shuffle=False)
-            
-            # Get features for train and validation sets
-            train_features = get_features(train_loader, backbone_model, args.device).to("cpu")
-            val_features = get_features(val_loader, backbone_model, args.device).to("cpu")
-
-            train_c = proj_layer(train_features.detach())
-            val_c = proj_layer(val_features.detach())
-        
+        train_c = proj_layer(target_features.detach())
+        val_c = proj_layer(val_target_features.detach())
+    
         train_mean = torch.mean(train_c, dim=0, keepdim=True)
         train_std = torch.std(train_c, dim=0, keepdim=True)
         

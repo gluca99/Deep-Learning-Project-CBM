@@ -31,7 +31,7 @@ nor_wf=False
 solver=grad
 gamma=0.2
 
-SAVE_DIR=~/result/seed${SEED}/nopretrain
+SAVE_DIR=~/result/seed${SEED}/nopretrain_interpretable
 #SAVE_DIR=~/result/${SEED}/nopretrain
 
 for ((i=0; i<$task_num; i++));
