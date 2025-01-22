@@ -13,9 +13,11 @@ parser = argparse.ArgumentParser(description='Settings for creating CBM')
 
 parser.add_argument("--dataset", type=str, default="cifar100")
 parser.add_argument("--seed", type=str, default="3456")
+parser.add_argument("--task_name", type=str, default="3456")
 parser.add_argument("--save_dir", type=str, default="save_dir")
 parser.add_argument("--task_num", type=int, default=10)
 parser.add_argument("--nonlinear", type=str, default="False")
+parser.add_argument("--pretrain", action='store_true', help="flag to use pretrained backbone")
 # %%
 # change this to the correct model dir, everything else should be taken care of
 def get_dataset(load_dir,seed):
@@ -28,8 +30,8 @@ def get_dataset(load_dir,seed):
     return val_data_t,dataset,args["train1"]
 
 # %%
-def get_model(model_dir,dataset,seed,train1,nonlinear):
-    model = cbm.load_cbm(model_dir,dataset,seed,train1,nonlinear, device)
+def get_model(model_dir,dataset,seed,train1,nonlinear,pretrain=False):
+    model = cbm.load_cbm(model_dir,dataset,seed,train1,nonlinear, device, pretrain=pretrain)
     return model
 
 
@@ -38,7 +40,7 @@ def eval(val_data_t,model):
     total = 0
     for images, labels in tqdm(DataLoader(val_data_t, 50, num_workers=2, pin_memory=True)):
         with torch.no_grad():
-            outs, _ = model(images.to(device))
+            outs, _ = model(images.to(torch.float32).to(device))
             pred = torch.argmax(outs, dim=1)
             correct += torch.sum(pred.cpu()==labels)
             total += len(labels)
@@ -50,13 +52,19 @@ if __name__=='__main__':
     result_list={}
     for d in range(args.task_num):
         result_list[d]=[]
-        load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.seed)
+        if "fix" not in args.seed:
+            load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.seed)
+        else:
+            load_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,d,args.task_num,args.task_name)
         print("load data:",load_dir)
         val_data,dataset,train1=get_dataset(load_dir,args.seed)
         for m in range(d,args.task_num):
-            model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.seed)
+            if "fix" not in args.seed:
+                model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.seed)
+            else:
+                model_dir='%s/%s_task_%d_%d_%s_cbm' % (args.save_dir,args.dataset,m,args.task_num,args.task_name)
             print("load model:",model_dir)
-            model=get_model(model_dir,dataset,args.seed,train1,args.nonlinear)
+            model=get_model(model_dir,dataset,args.seed,train1,args.nonlinear,pretrain=args.pretrain)
             acc=eval(val_data,model)
             result_list[d].append(acc.item())
     

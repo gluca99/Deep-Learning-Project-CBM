@@ -31,7 +31,11 @@ def save_target_activations(target_model, dataset, save_name, target_layers = ["
     
     with torch.no_grad():
         for images, labels in tqdm(DataLoader(dataset, batch_size, num_workers=2, pin_memory=True)):
-            features = target_model(images.to(device))
+            # to ensure correct dtypes
+            if images.dtype != torch.float32:
+                features = target_model(images.to(torch.float32).to(device))
+            else:
+                features = target_model(images.to(device))
     
     for target_layer in target_layers:
         torch.save(torch.cat(all_features[target_layer]), save_names[target_layer])
@@ -53,8 +57,12 @@ def save_clip_image_features(model, dataset, save_name, batch_size=1000 , device
         os.makedirs(save_dir)
     with torch.no_grad():
         for images, labels in tqdm(DataLoader(dataset, batch_size, num_workers=2, pin_memory=True)):
-            features = model.encode_image(images.to(device))
-            all_features.append(features.cpu())
+            if images.dtype != torch.float32:
+                features = model.encode_image(images.to(torch.float32).to(device))
+                all_features.append(features.cpu())
+            else:
+                features = model.encode_image(images.to(device))
+                all_features.append(features.cpu())
     torch.save(torch.cat(all_features), save_name)
     #free memory
     del all_features
@@ -77,8 +85,7 @@ def save_clip_text_features(model, text, save_name, batch_size=1000):
     return
 
 def save_activations(clip_name, target_name, target_layers, d_probe,seed,train1, 
-                     concept_set, batch_size, device, pool_mode, save_dir,words):
-    
+                     concept_set, batch_size, pretrain, device, pool_mode, save_dir,words):
     
     target_save_name, clip_save_name, text_save_name = get_save_names(clip_name, target_name, 
                                                                     "{}", d_probe, concept_set, 
@@ -86,19 +93,19 @@ def save_activations(clip_name, target_name, target_layers, d_probe,seed,train1,
     save_names = {"clip": clip_save_name, "text": text_save_name}
     for target_layer in target_layers:
         save_names[target_layer] = target_save_name.format(target_layer)
-        
+
     if _all_saved(save_names):
         return
-    
     clip_model, clip_preprocess = clip.load(clip_name, device=device)
     
     if target_name.startswith("clip_"):
         target_model, target_preprocess = clip.load(target_name[5:], device=device)
     else:
-        target_model, target_preprocess = data_utils.get_target_model(target_name,d_probe,seed,train1, device)
+        target_model, target_preprocess = data_utils.get_target_model(target_name,d_probe,seed,train1,device,pretrain=pretrain)
+    
     #setup data
     data_c, data_t = data_utils.get_data(d_probe,seed, clip_preprocess, target_preprocess)
-
+    
     text = clip.tokenize(["{}".format(word) for word in words]).to(device)
     
     save_clip_text_features(clip_model, text, text_save_name, batch_size)
@@ -109,7 +116,7 @@ def save_activations(clip_name, target_name, target_layers, d_probe,seed,train1,
     else:
         save_target_activations(target_model, data_t, target_save_name, target_layers,
                                 batch_size, device, pool_mode)
-    
+
     return
     
     

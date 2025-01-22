@@ -1,0 +1,238 @@
+a basket
+a beach
+a beard (in some cases)
+a bird
+a bird feeder
+a blanket
+a bouquet
+a branch
+a bridle
+a bug
+a bulbous shape
+a bus driver
+a bus fare
+a bus lane
+a bus pass
+a bus schedule
+a bus shelter
+a bus sign
+a bus stop
+a can of Raid
+a caravan
+a career
+a child
+a city
+a cocoon
+a compost bin
+a conductor
+a crib
+a deep voice
+a deer
+a den
+a desert
+a desert animal
+a diaper
+a dirty floor
+a dirty kitchen
+a driveway
+a family
+a fish
+a flower
+a fly
+a fork
+a fresh, earthy smell
+a garage
+a garden
+a green or brown shell
+a hitch
+a hole in the wall
+a hump
+a job
+a knife
+a lake
+a large number of trees
+a large, boxy shape
+a large, elongated body
+a large, green body
+a large, humped body
+a large, rectangular body
+a large, rounded bottom
+a lead
+a leaf
+a leafy floor
+a load of dirt
+a load of hay
+a load of lumber
+a locomotive
+a log
+a long hood
+a long length
+a long stem with thorns
+a long, thick tail
+a long, thin abdomen
+a long, thin antennae
+a loud horn
+a mask
+a napkin
+a neck
+a nut
+a oasis
+a pacifier
+a parent
+a parking lot
+a path
+a person
+a petal
+a phone
+a plant
+a pond
+a raised edge
+a rider
+a river
+a roach motel
+a roach trap
+a rock
+a saddle
+a schedule
+a segmented body
+a shadow
+a shell
+a short, stubby stem
+a sidewalk
+a small head
+a small mouth
+a small, furry body
+a small, narrow neck
+a small, pointed top
+a smooth surface
+a soft, round head
+a spade
+a spoon
+a spray bottle
+a stem
+a stem protruding from the top
+a stream
+a street
+a stroller
+a sturdy material
+a swamp
+a sweet fragrance
+a sweet, juicy flesh
+a tall stature
+a tall, rectangular shape
+a tall, upright posture
+a tarp
+a teardrop-shaped body
+a thorn
+a ticket
+a torso
+a tow rope
+a toy
+a track
+a trail
+a trailer
+a trash can
+a tree
+a uniform color
+a vase
+a web
+a white or brown color
+a worm bin
+a wormery
+able to climb trees
+acorns
+an open bed in the back
+arthropod
+baby possums
+biome
+broad shoulders
+building
+bushes
+can be a variety of colors
+carnivore
+cars
+compost
+container
+dense vegetation
+dirt
+dish
+ecosystem
+eight eyes
+eight legs
+fang-like mouthparts
+flatware
+four legs
+four wheels
+front paws that resemble hands
+fruit
+fungus
+gills on the underside
+gloves
+grass
+gray or brown fur
+greenish-brown color
+habitat
+hairy or spiny legs
+human
+invertebrate
+large eyes
+large wheels
+large windows
+leaves
+logs
+long and slender
+long legs
+long, antennae-like feelers
+long, spiny legs
+lots of smoke
+lots of windows
+male
+mammal
+many legs
+marsupial
+moves by wriggling
+multiple doors
+multiple rows of windows
+no legs
+nuts
+object
+often brightly colored
+often found in the dirt
+often has a point at the top
+often has stripes or spots
+organism
+passenger cars
+passengers
+pedestrians
+people
+person
+pointed ears
+pointed snout
+rocks
+rodent
+sand
+scratches
+seeds in the center
+shade from the trees
+sharp claws
+short legs
+slow movement
+small nose
+smooth, green skin
+smooth, straight lines
+soil
+streets
+structure
+thorns
+thorny branches
+tiny mouth
+transportation
+trees
+two arms and two legs
+two doors
+two feelers
+two large, compound eyes
+vertebrate
+visibly male genitalia
+water
+wildlife

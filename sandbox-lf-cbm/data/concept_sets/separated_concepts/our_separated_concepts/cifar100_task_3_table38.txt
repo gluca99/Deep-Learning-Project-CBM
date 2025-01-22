@@ -1,0 +1,230 @@
+a TV
+a alarm clock
+a backrest
+a barn
+a bed frame
+a bicycle seat
+a bicyclist
+a bike lane
+a blade or blades
+a blanket
+a body of water
+a box spring
+a bright, red color
+a bus driver
+a bus fare
+a bus lane
+a bus pass
+a bus schedule
+a bus shelter
+a bus sign
+a bus stop
+a cab for the driver
+a chain
+a chimney
+a city
+a coffee table
+a comfortable design
+a comforter
+a computer
+a conductor
+a control room
+a countdown
+a country
+a courtyard
+a crew of astronauts
+a crosswalk
+a cultivator
+a curb
+a desk
+a door
+a door or doors on the front
+a drawbridge
+a dress
+a driver's license
+a driveway
+a farm
+a farmer
+a field
+a flag
+a floor
+a footboard
+a fork
+a frame
+a frame connecting the wheels
+a garage
+a garden hose
+a gas tank
+a gate
+a glass
+a gun
+a handle
+a handle for steering
+a handlebar
+a hanger
+a harrow
+a headboard
+a heavy, metal body
+a helmet
+a hitch
+a hitch for pulling trailers
+a keep
+a knife
+a large, boxy shape
+a large, flat surface
+a large, imposing structure
+a large, powerful engine
+a large, rectangular body
+a launch
+a launchpad
+a lawn
+a light color
+a living room
+a load of dirt
+a load of hay
+a load of lumber
+a lock
+a locomotive
+a long hood
+a long length
+a long, cylindrical shape
+a long, straight path
+a loud horn
+a mattress
+a military vehicle
+a mirror
+a moat
+a motor
+a motorcycle license
+a office
+a pants
+a parking lot
+a pedal
+a pedestrian
+a person
+a pillow
+a pitched roof
+a place mat
+a platform at one end
+a plow
+a portcullis
+a pothole
+a rake
+a remote control
+a river
+a rocket engine
+a rocket ship
+a roof
+a room
+a schedule
+a seat
+a seat affixed to the frame
+a seat for the rider
+a shirt
+a shovel
+a sidewalk
+a soft surface
+a soft, upholstered surface
+a soldier
+a space shuttle
+a spaceship
+a spoon
+a sprinkler
+a steering wheel
+a stop sign
+a street
+a street light
+a structure that spans a gap
+a suit
+a tall, rectangular shape
+a tarp
+a ticket
+a tire
+a tow rope
+a tower
+a track
+a tractor trailer
+a traffic light
+a trailer
+a tree
+a uniform
+a uniform color
+a vehicle
+a wall
+a wide, flat front
+a yard
+an open bed in the back
+armrests on either side
+blades for cutting grass
+building
+cars
+chickens
+container
+doors
+exhaust pipes
+fins at the other end
+four wheels
+furniture
+garden equipment
+grass
+hangers
+insurance
+intended for sleeping on
+large wheels
+large windows
+legs or support underneath
+legs to support the seat
+location
+long and slender
+lots of smoke
+lots of windows
+machine
+made of asphalt or concrete
+made of metal or glass
+made of stone or brick
+man-made object
+markings for lanes
+may have an air pump or filter
+mode of transportation
+motorized vehicle
+multiple doors
+multiple rows of windows
+object
+often has a point at the top
+often has towers and turrets
+outdoor
+passenger cars
+passengers
+pedals
+pedals attached to the frame
+pedestrians
+people
+pillows
+plenty of space for seating
+pointed at one end
+propulsion at the back
+rail vehicle
+registration
+several towers or turrets
+shoes
+siding or brick exterior
+smooth, straight lines
+stone walls
+storage
+streets
+structure
+tool
+tracks for wheels
+tram
+transportation
+two doors
+two wheels
+two wheels of equal size
+used to hold liquids or gases
+usually electric power
+usually has a lid or cover
+way
+wheels
+wheels for mobility
+windows
+windows and doors

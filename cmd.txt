@@ -1,0 +1,1 @@
+python sandbox-lf-cbm/train_cbm.py --nonlinear True --seed 3456 --gamma 0.2 --solver grad --lam 0 --concept_method c1 --dataset cifar100_task_0_5_3456 --concept_set sandbox-lf-cbm/data/concept_sets/separated_concepts/cifar100_task_0_3456_filtered.txt --save_dir ~/result/cc_cbm/ --freeze_wc True --normalize_wf False --interpretability_cutoff -100 

@@ -1,21 +1,40 @@
 import os
 import json
 import torch
+import torch.nn as nn
 import data_utils
 from collections import OrderedDict
 
 class CBM_model(torch.nn.Module):
-    def __init__(self, backbone_name, W_c, W_g, b_g, proj_mean, proj_std, dataset,seed,train1,nonlinear, device="cuda"):
+    def __init__(self, backbone_name, W_c, W_g, b_g, proj_mean, proj_std, dataset,seed,train1,nonlinear, device="cuda",pretrain=False,load_dir=None):
         super().__init__()
-        model, _ = data_utils.get_target_model(backbone_name,dataset,seed,train1, device)
+        model, _ = data_utils.get_target_model(backbone_name,dataset,seed,train1,device,pretrain=pretrain)
         #remove final fully connected layer
         if "clip" in backbone_name:
             self.backbone = model
         elif "cub" in backbone_name:
             self.backbone = lambda x: model.features(x)
         else:
-            self.backbone = torch.nn.Sequential(*list(model.children())[:-1])
+            if not pretrain:
+                backbone_layers = list(model.children())[:-1]
 
+                # add dropout layer
+                layers_with_dropout = []
+                for layer in backbone_layers:
+                    layers_with_dropout.append(layer)
+                    if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear) or isinstance(layer, nn.Sequential):
+                        # Add Dropout after convolutional or linear layers
+                        layers_with_dropout.append(nn.Dropout(p=0))
+                
+                # Build the new backbone model
+                self.backbone = nn.Sequential(*layers_with_dropout)
+            else:
+                self.backbone = torch.nn.Sequential(*list(model.children())[:-1])
+        
+        # load model trained from scratch
+        if not pretrain:
+            if load_dir is not None:
+                self.backbone.load_state_dict(torch.load(os.path.join(load_dir ,"backbone.pth"), map_location=device))
         #self.backbone = torch.nn.Sequential(*list(model.children())[:-1])
 
         if(nonlinear=='False'):
@@ -73,7 +92,7 @@ class standard_model(torch.nn.Module):
         return x, proj_c
 
     
-def load_cbm(load_dir,dataset,seed,train1,nonlinear, device):
+def load_cbm(load_dir,dataset,seed,train1,nonlinear, device, pretrain=False):
     with open(os.path.join(load_dir ,"args.txt"), 'r') as f:
         args = json.load(f)
 
@@ -84,7 +103,7 @@ def load_cbm(load_dir,dataset,seed,train1,nonlinear, device):
     proj_mean = torch.load(os.path.join(load_dir, "proj_mean.pt"), map_location=device)
     proj_std = torch.load(os.path.join(load_dir, "proj_std.pt"), map_location=device)
 
-    model = CBM_model(args['backbone'], W_c, W_g, b_g, proj_mean, proj_std,dataset,seed,train1,nonlinear, device)
+    model = CBM_model(args['backbone'], W_c, W_g, b_g, proj_mean, proj_std,dataset,seed,train1,nonlinear,device,pretrain=pretrain,load_dir=load_dir)
     return model
 
 def load_std(load_dir, device):

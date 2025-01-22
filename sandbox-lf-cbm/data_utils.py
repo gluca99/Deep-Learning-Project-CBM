@@ -6,7 +6,7 @@ from torchvision import datasets, transforms, models
 from torchvision.datasets import ImageFolder
 from avalanche.benchmarks.datasets import CIFAR10,CIFAR100,TinyImagenet,CUB200
 from avalanche.benchmarks.generators import nc_benchmark
-from modified_represent import resnet18_rep
+#from modified_represent import resnet18_rep
 
 import clip
 from pytorchcv.model_provider import get_model as ptcv_get_model
@@ -92,7 +92,7 @@ def get_resnet_imagenet_preprocess():
     return preprocess
 
 
-def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None):
+def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None, batch=None):
     print("get_data:",dataset_name)
     seg=dataset_name.split("_")
     if seg[1]=="task":
@@ -133,10 +133,10 @@ def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None):
 
         else:
             order_list=[]
-            if seed=='fix':
-                order_file=CACHE+'%s_order.txt'%(seg[0])
-            else:
-                order_file=CACHE+'%s_order_%s.txt'%(seg[0],seed)
+            # if seed=='fix':
+            #     order_file=CACHE+'%s_order.txt'%(seg[0])
+            # else:
+            order_file=CACHE+'%s_order_%s.txt'%(seg[0],seg[4])
             with open(order_file, 'r') as file:
                 for line in file:
                     order_list.append(int(line))
@@ -155,10 +155,17 @@ def get_data(dataset_name,seed, clip_preprocess=None, target_preprocess=None):
             label=torch.tensor(label)
             clip_data=[item[0] for item in clip_scenario.test_stream[task].dataset]
             target_data=[item[0] for item in target_scenario.test_stream[task].dataset]
-        clip_tensor=torch.stack(clip_data,dim=0)
-        target_tensor=torch.stack(target_data,dim=0)
-        data_c=torch.utils.data.TensorDataset(clip_tensor,label)
-        data_t=torch.utils.data.TensorDataset(target_tensor,label)
+        
+        del clip_scenario, target_scenario
+        # turn to float16 precision
+        clip_data = [clip_data[i].to(torch.float16) for i in range(len(clip_data))]
+        target_data = [target_data[i].to(torch.float16) for i in range(len(target_data))]
+
+        clip_data=torch.stack(clip_data,dim=0)
+        target_data=torch.stack(target_data,dim=0)
+        
+        data_c=torch.utils.data.TensorDataset(clip_data,label)
+        data_t=torch.utils.data.TensorDataset(target_data,label)
         
     else:
         if dataset_name == "cifar100_train":
@@ -226,10 +233,10 @@ def get_pil_data(dataset_name,seed):
                 scenario = nc_benchmark(train, test, n_experiences=int(seg[3]), task_labels=False)
         else:
             order_list=[]
-            if seed=='fix':
-                order_file=CACHE+'%s_order.txt'%(seg[0])
-            else:
-                order_file=CACHE+'%s_order_%s.txt'%(seg[0],seed)
+            # if seed=='fix':
+            #     order_file=CACHE+'%s_order.txt'%(seg[0])
+            # else:
+            order_file=CACHE+'%s_order_%s.txt'%(seg[0],seg[4])
             with open(order_file, 'r') as file:
                 for line in file:
                     order_list.append(int(line))
@@ -280,37 +287,38 @@ def get_targets_only(dataset_name,seed):
     else:
         return pil_data.targets
 
-def get_target_model(target_name,d_probe,seed,train1, device):
+def get_target_model(target_name,d_probe,seed,train1,device,pretrain=False):
     if target_name.startswith("clip_"):
         target_name = target_name[5:]
         model, preprocess = clip.load(target_name, device=device)
         target_model = lambda x: model.encode_image(x).float()
     
     elif target_name == 'resnet18_img':
-        target_model = models.resnet18(pretrained=True).to(device)
+        target_model = models.resnet18(pretrained=pretrain).to(device)
         preprocess = get_resnet_imagenet_preprocess()
     
     elif target_name == 'resnet34':
-        target_model = models.resnet34(pretrained=True).to(device)
+        target_model = models.resnet34(pretrained=pretrain).to(device)
         preprocess = get_resnet_imagenet_preprocess()
     
     elif target_name == 'resnet50':
-        target_model = models.resnet50(pretrained=True).to(device)
+        target_model = models.resnet50(pretrained=pretrain).to(device)
         preprocess = get_resnet_imagenet_preprocess()
     
-    elif target_name == 'resnet18_ssre':
-        target_model = resnet18_rep(True).to(device)
-        preprocess = get_resnet_imagenet_preprocess()
+    #elif target_name == 'resnet18_ssre':
+    #    target_model = resnet18_rep(True).to(device)
+    #    preprocess = get_resnet_imagenet_preprocess()
     
     elif target_name == 'resnet18_places': 
         if train1=='False':
             target_model = models.resnet18(pretrained=False, num_classes=365).to(device)
-            state_dict = torch.load('./sandbox-lf-cbm/data/resnet18_places365.pth.tar')['state_dict']
-            new_state_dict = {}
-            for key in state_dict:
-                if key.startswith('module.'):
-                    new_state_dict[key[7:]] = state_dict[key]
-            target_model.load_state_dict(new_state_dict)
+            if pretrain:
+                state_dict = torch.load('./sandbox-lf-cbm/data/resnet18_places365.pth.tar')['state_dict']
+                new_state_dict = {}
+                for key in state_dict:
+                    if key.startswith('module.'):
+                        new_state_dict[key[7:]] = state_dict[key]
+                target_model.load_state_dict(new_state_dict)
         else:
             Label={}
             Label['cifar10']=10
@@ -319,7 +327,7 @@ def get_target_model(target_name,d_probe,seed,train1, device):
             Label['CUB200']=200
             Label['TinyImagenet']=200
             seg=d_probe.split("_")
-            target_model = models.resnet18(pretrained=False, num_classes=Label[seg[0]]).to(device)
+            target_model = models.resnet18(pretrained=pretrain, num_classes=Label[seg[0]]).to(device)
             ck_dir='./ck_dir/'
             ptname='SEED_%s/resnet18-Naive-%s-task0-5.pt' % (seed,seg[0])
             ptname=ck_dir+ptname

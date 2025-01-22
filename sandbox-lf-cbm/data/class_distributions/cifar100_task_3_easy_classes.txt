@@ -1,0 +1,20 @@
+worm
+caterpillar
+cockroach
+spider
+mushroom
+forest
+pear
+rose
+crocodile
+squirrel
+turtle
+possum
+train
+bus
+pickup truck
+skyscraper
+plate
+man
+camel
+baby

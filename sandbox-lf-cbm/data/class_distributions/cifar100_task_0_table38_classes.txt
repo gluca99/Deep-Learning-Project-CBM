@@ -1,0 +1,20 @@
+beaver
+dolphin
+otter
+seal
+whale
+aquarium fish
+flatfish
+ray
+shark
+trout
+bee
+beetle
+butterfly
+caterpillar
+cockroach
+crab
+lobster
+snail
+spider
+worm

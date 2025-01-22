@@ -1,0 +1,20 @@
+bear
+bee
+butterfly
+camel
+caterpillar
+chair
+elephant
+forest
+hamster
+lion
+motorcycle
+otter
+plate
+sea
+shark
+shrew
+spider
+tank
+train
+willow tree

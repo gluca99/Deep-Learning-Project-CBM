@@ -1,0 +1,20 @@
+beetle
+cloud
+crocodile
+lamp
+leopard
+lizard
+palm tree
+pine tree
+porcupine
+snail
+streetcar
+sweet pepper
+table
+telephone
+television
+tiger
+tulip
+turtle
+woman
+worm
