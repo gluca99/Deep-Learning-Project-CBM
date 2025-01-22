@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import os
 import random
 import utils
@@ -30,12 +31,14 @@ parser.add_argument("--normalize_wf_method",type=str,default="all")
 parser.add_argument("--backbone", type=str, default="resnet18_places", help="Which pretrained model to use as backbone")
 parser.add_argument("--clip_name", type=str, default="ViT-B/16", help="Which CLIP model to use")
 parser.add_argument("--pretrain", action='store_true', help="flag to use pretrained backbone")
+parser.add_argument("--extend_concept_set", action='store_true', help="flag to extend concept set with concepts from previous tasks.")
 parser.add_argument("--interpretable", action='store_true', help="flag to use interpretability filter after projection training")
 
 parser.add_argument("--device", type=str, default="cuda", help="Which device to use")
 parser.add_argument("--batch_size", type=int, default=512, help="Batch size used when saving model/CLIP activations")
 parser.add_argument("--saga_batch_size", type=int, default=256, help="Batch size used when fitting final layer")
 parser.add_argument("--proj_batch_size", type=int, default=50000, help="Batch size to use when learning projection layer")
+parser.add_argument("--dropout_rate", type=float, default=0, help="set dropout rate for backbone model")
 
 parser.add_argument("--feature_layer", type=str, default='layer4', 
                     help="Which layer to collect activations from. Should be the name of second to last layer in the model")
@@ -157,7 +160,7 @@ def train_cbm_and_save(args):
 
     # load concept set from previous dataset
     num_previous_concepts = 0
-    if task>0:
+    if task>0 and args.extend_concept_set:
         previous_dataset=args.dataset.replace("task_%d"%(task),"task_%d"%(task-1))
         inter_concept_path="{}/{}_cbm/concepts.txt".format(args.save_dir,previous_dataset)
         with open(inter_concept_path) as f:
@@ -254,7 +257,19 @@ def train_cbm_and_save(args):
         if args.backbone == "resnet18_places":
             base_model = models.resnet18(pretrained=False, num_classes=365).to(args.device)
             # remove last projection layer
-            backbone_model = torch.nn.Sequential(*list(base_model.children())[:-1])
+            #backbone_model = torch.nn.Sequential(*list(base_model.children())[:-1])
+            backbone_layers = list(base_model.children())[:-1]
+
+            # add dropout layer
+            layers_with_dropout = []
+            for layer in backbone_layers:
+                layers_with_dropout.append(layer)
+                if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear) or isinstance(layer, nn.Sequential):
+                    # Add Dropout after convolutional or linear layers
+                    layers_with_dropout.append(nn.Dropout(p=args.dropout_rate))
+            
+            # Build the new backbone model
+            backbone_model = nn.Sequential(*layers_with_dropout)
         
         if task>0:
             previous_dataset=args.dataset.replace("task_%d"%(task),"task_%d"%(task-1))
@@ -304,11 +319,7 @@ def train_cbm_and_save(args):
                                 if (args.nonlinear=='False'):
                                     proj_layer.weight[i,:]=W_c_pre[j,:]
                                 else:
-                                    try:
-                                        proj_layer.cbl.weight[i,:]=W_c_pre.cbl.weight[j,:]
-                                    except:
-                                        import pdb
-                                        pdb.set_trace()
+                                    proj_layer.cbl.weight[i,:]=W_c_pre.cbl.weight[j,:]
                                 break
                             else:
                                 seen-=1
@@ -451,8 +462,8 @@ def train_cbm_and_save(args):
             target_features = get_features(train_loader, backbone_model, args.device).to("cpu")
             val_target_features = get_features(val_loader, backbone_model, args.device).to("cpu")
     
-    #delete concepts that are not interpretable (only with if pretrained model)
-    if args.pretrain or args.interpretable:
+    #delete concepts that are not interpretable
+    if args.interpretable:
         with torch.no_grad():
             outs = proj_layer(val_target_features.to(args.device).detach())
             sim = similarity_fn(val_clip_features.to(args.device).detach(), outs)

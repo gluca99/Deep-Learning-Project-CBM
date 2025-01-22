@@ -1,6 +1,7 @@
 import os
 import json
 import torch
+import torch.nn as nn
 import data_utils
 from collections import OrderedDict
 
@@ -14,7 +15,21 @@ class CBM_model(torch.nn.Module):
         elif "cub" in backbone_name:
             self.backbone = lambda x: model.features(x)
         else:
-            self.backbone = torch.nn.Sequential(*list(model.children())[:-1])
+            if not pretrain:
+                backbone_layers = list(model.children())[:-1]
+
+                # add dropout layer
+                layers_with_dropout = []
+                for layer in backbone_layers:
+                    layers_with_dropout.append(layer)
+                    if isinstance(layer, nn.Conv2d) or isinstance(layer, nn.Linear) or isinstance(layer, nn.Sequential):
+                        # Add Dropout after convolutional or linear layers
+                        layers_with_dropout.append(nn.Dropout(p=0))
+                
+                # Build the new backbone model
+                self.backbone = nn.Sequential(*layers_with_dropout)
+            else:
+                self.backbone = torch.nn.Sequential(*list(model.children())[:-1])
         
         # load model trained from scratch
         if not pretrain:
